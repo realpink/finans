@@ -11,7 +11,73 @@
         .input-group { margin-bottom: 30px; }
         input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #c9a84c; font-family: monospace; margin-bottom: 15px; box-sizing: border-box; }
         button { width: 100%; padding: 15px; background: #c9a84c; color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
-        button:hover { background: #e8d08a; }
+        button:hover { background: #e8d08a; }<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kapital — Wall Street Analiz</title>
+    <style>
+        body { font-family: 'Georgia', serif; background: #0a0a08; color: #f5f2eb; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { width: 100%; max-width: 700px; background: #141412; padding: 40px; border: 1px solid #2a2a24; margin-top: 50px; }
+        h1 { font-size: 2.5rem; border-bottom: 1px solid #2a2a24; padding-bottom: 20px; margin-bottom: 30px; }
+        .gold { color: #c9a84c; }
+        input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #c9a84c; font-family: monospace; margin-bottom: 15px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #c9a84c; color: #000; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
+        #output { line-height: 1.8; font-size: 1.1rem; white-space: pre-wrap; color: #b5b5ad; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Kapital <span class="gold">Analiz</span></h1>
+        <input type="password" id="key" placeholder="GOOGLE AI STUDIO API KEY">
+        <button onclick="analizYap()">Raporu Hazırla</button>
+        <div id="output">Lütfen API anahtarınızı girip butona basın...</div>
+    </div>
+
+    <script>
+        async function analizYap() {
+            const key = document.getElementById('key').value.trim();
+            const out = document.getElementById('output');
+            if (!key) return alert("Anahtar girmediniz!");
+            
+            out.innerHTML = "<span style='color:#c9a84c'>Google sunucularına bağlanılıyor...</span>";
+
+            // Denenecek model isimleri
+            const models = [
+                "gemini-1.5-flash",
+                "models/gemini-1.5-flash",
+                "gemini-pro"
+            ];
+
+            for (let modelName of models) {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${key}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: "Sen profesyonel bir finans analistisin. Bugünün borsa ve ekonomi durumu hakkında Türkçe kısa bir yorum yap." }] }]
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.candidates && data.candidates[0]) {
+                        out.innerHTML = data.candidates[0].content.parts[0].text;
+                        return; // Başarılı olursa döngüden çık
+                    } else if (modelName === models[models.length - 1]) {
+                        // Eğer son model de başarısız olursa hata göster
+                        out.innerHTML = "Hata: " + (data.error ? data.error.message : "Cevap alınamadı.");
+                    }
+                } catch (e) {
+                    if (modelName === models[models.length - 1]) {
+                        out.innerHTML = "Bağlantı hatası: " + e.message;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
         #output { line-height: 1.8; font-size: 1.1rem; white-space: pre-wrap; color: #b5b5ad; }
         .loading { color: #c9a84c; font-style: italic; }
     </style>
