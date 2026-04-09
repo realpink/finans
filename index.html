@@ -1,161 +1,64 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kapital — Finans & Yatırım</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0a0a08; --cream: #f5f2eb; --gold: #c9a84c; --gold-light: #e8d08a;
-    --red: #c23b22; --green: #1d7a4a; --text: #1a1a16; --muted: #6b6b60;
-    --border: rgba(10,10,8,0.12); --font-display: 'Playfair Display', Georgia, serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
-  body { font-family: var(--font-body); background: var(--cream); color: var(--text); line-height: 1.6; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(245,242,235,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
-  .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; color: var(--black); text-decoration: none; }
-  .nav-logo span { color: var(--gold); }
-  .hero { min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; border-bottom: 0.5px solid var(--border); }
-  .hero-left { padding: 6rem 4rem; border-right: 0.5px solid var(--border); }
-  .hero-title { font-family: var(--font-display); font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
-  .hero-title em { font-style: italic; color: var(--gold); }
-  
-  /* AI ANALİZ PANELİ - BURASI GÜNCELLENDİ */
-  .ai-analysis-section { background: var(--black); padding: 5rem 4rem; color: var(--cream); }
-  .api-key-setup { 
-    background: rgba(245,242,235,0.06); 
-    border: 1px solid var(--gold); 
-    padding: 2rem; 
-    margin-bottom: 3rem; 
-    border-radius: 4px;
-    display: flex; gap: 1rem; align-items: center;
-  }
-  .api-key-input { 
-    flex: 1; padding: 0.8rem; background: #1a1a16; border: 1px solid #333; 
-    color: white; font-family: monospace; outline: none;
-  }
-  .api-key-save { 
-    padding: 0.8rem 2rem; background: var(--gold); color: black; 
-    border: none; cursor: pointer; font-weight: bold; text-transform: uppercase;
-  }
-  .ai-content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
-  .ai-main-card { border: 1px solid rgba(245,242,235,0.1); padding: 2rem; }
-  .ai-analysis-headline { font-family: var(--font-display); font-size: 2rem; margin-bottom: 1.5rem; color: var(--gold); }
-  .skeleton { background: #222; height: 20px; margin-bottom: 10px; border-radius: 4px; animation: pulse 1.5s infinite; }
-  @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 0.8; } 100% { opacity: 0.5; } }
-  
-  @media (max-width: 900px) { .hero, .ai-content-grid { grid-template-columns: 1fr; } .hero-left { border-right: none; } nav { padding: 1rem; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapital — Wall Street Analiz</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f2eb; color: #1a1a16; margin: 0; padding: 20px; }
+        .card { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .api-section { background: #0a0a08; color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        input { width: calc(100% - 130px); padding: 12px; border: 1px solid #333; background: #222; color: #gold; border-radius: 4px; }
+        button { padding: 12px 20px; background: #c9a84c; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        #output { line-height: 1.8; font-size: 1.1rem; white-space: pre-wrap; }
+        .error-box { background: #fee; color: #c23b22; padding: 15px; border-radius: 4px; border: 1px solid #c23b22; }
+    </style>
 </head>
 <body>
-
-<nav>
-  <a href="#" class="nav-logo">Kapit<span>a</span>l</a>
-  <div style="display:flex; gap: 2rem;">
-    <a href="#ai-analysis" style="text-decoration:none; color:var(--muted); font-size:0.8rem; font-weight:bold; text-transform:uppercase;">AI Analiz</a>
-    <a href="#newsletter" style="text-decoration:none; background:var(--black); color:white; padding: 0.5rem 1rem; font-size:0.8rem;">Abone Ol</a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="hero-left">
-    <div style="color:var(--gold); font-size:0.7rem; font-weight:bold; letter-spacing:2px; margin-bottom:1rem;">GÜNLÜK FİNANS</div>
-    <h1 class="hero-title">Piyasaları<br><em>anlayan</em><br>okursunuz.</h1>
-    <p style="color:var(--muted); max-width:400px; margin-bottom:2rem;">Wall Street standartlarında analizler ve yapay zeka destekli piyasa yorumları.</p>
-  </div>
-  <div style="padding: 6rem 4rem; background: #eee; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.5rem; text-align:center;">
-    BIST 100: 9.847,32 <span style="color:green; margin-left:10px;">▲ %1,24</span>
-  </div>
-</section>
-
-<section class="ai-analysis-section" id="ai-analysis">
-  <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:2rem;">Günün Finans Analizi</h2>
-  
-  <div class="api-key-setup" id="apiKeySetup">
-    <div style="flex-shrink:0;">
-       <div style="font-size:0.7rem; color:var(--gold); font-weight:bold;">GOOGLE AI STUDIO ANAHTARI</div>
-    </div>
-    <input class="api-key-input" type="password" id="apiKeyInput" placeholder="AIzaSy... ile başlayan anahtarı buraya yapıştırın">
-    <button class="api-key-save" onclick="saveApiKey()">Analizi Başlat</button>
-  </div>
-
-  <div class="ai-content-grid">
-    <div class="ai-main-card" id="analysisContent">
-      <div class="skeleton" style="width:80%; height:40px;"></div>
-      <div class="skeleton" style="width:100%;"></div>
-      <div class="skeleton" style="width:90%;"></div>
-      <div class="skeleton" style="width:95%;"></div>
-      <p style="color: #666; margin-top: 2rem;">API Anahtarınızı yukarıya girip "Analizi Başlat" dediğinizde Gemini buraya özel analizini yazacaktır.</p>
-    </div>
-    
-    <div class="ai-sidebar">
-      <div style="border:1px solid #333; padding:1.5rem;">
-        <h4 style="color:var(--gold); font-size:0.8rem; margin-bottom:1rem;">PİYASA DUYARLILIĞI</h4>
-        <div style="height:10px; background:#222; border-radius:10px; overflow:hidden;">
-          <div id="bullBar" style="width:0%; height:100%; background:green; transition: 1s;"></div>
+    <div class="card">
+        <h1 style="font-family: serif; border-bottom: 2px solid #0a0a08; padding-bottom: 10px;">Kapital <span style="color:#c9a84c">Analiz</span></h1>
+        
+        <div class="api-section">
+            <p style="margin: 0 0 10px 0; font-size: 0.8rem; color: #c9a84c;">GOOGLE AI STUDIO API ANAHTARI</p>
+            <input type="password" id="keyInput" placeholder="AIzaSy...">
+            <button onclick="calistir()">Analiz Et</button>
         </div>
-        <p id="bullPct" style="font-size:0.8rem; margin-top:0.5rem; color:#888;">Yükseliş Beklentisi: --</p>
-      </div>
+
+        <div id="output">
+            <p style="color: #888;">Lütfen API anahtarınızı girip "Analiz Et" butonuna basın...</p>
+        </div>
     </div>
-  </div>
-</section>
 
-<script>
-const GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+    <script>
+        async function calistir() {
+            const key = document.getElementById('keyInput').value.trim();
+            const out = document.getElementById('output');
 
-// Sayfa yüklendiğinde eski anahtar varsa kutuya yaz
-document.addEventListener('DOMContentLoaded', () => {
-  const savedKey = localStorage.getItem('kapital_api_key');
-  if (savedKey) {
-    document.getElementById('apiKeyInput').value = savedKey;
-  }
-});
+            if(!key) { alert("Anahtar girmedin!"); return; }
+            out.innerHTML = "<b>Piyasalar analiz ediliyor, lütfen bekleyin...</b>";
 
-function saveApiKey() {
-  const key = document.getElementById('apiKeyInput').value.trim();
-  if (!key.startsWith('AIza')) {
-    alert('Lütfen geçerli bir Google AI Studio API anahtarı girin!');
-    return;
-  }
-  localStorage.setItem('kapital_api_key', key);
-  fetchAnalysis(key);
-}
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: "Sen bir finans uzmanısın. Bugünün ekonomi gündemini (Borsa, Altın, Döviz) profesyonelce yorumla. Türkçe yaz." }] }] })
+                });
 
-async function fetchAnalysis(apiKey) {
-  const contentDiv = document.getElementById('analysisContent');
-  contentDiv.innerHTML = '<div class="skeleton" style="width:100%;"></div><div class="skeleton" style="width:90%;"></div><p>Gemini verileri analiz ediyor, lütfen bekleyin...</p>';
+                const data = await response.json();
 
-  const prompt = "Sen bir Wall Street analistisin. Bugünün finansal durumu hakkında (BIST, Petrol, Altın) Türkçe, profesyonel ve etkileyici bir analiz yap. Analizini şu JSON formatında ver: { 'headline': 'başlık', 'text': 'analiz metni', 'bullScore': 75 }";
+                // Hata Kontrolü (Reading '0' hatasını engelleyen kısım)
+                if (data.candidates && data.candidates.length > 0) {
+                    out.innerHTML = data.candidates[0].content.parts[0].text;
+                } else if (data.error) {
+                    out.innerHTML = `<div class="error-box"><b>API Hatası:</b> ${data.error.message}<br><small>Anahtarın yanlış olabilir veya henüz onaylanmamış olabilir.</small></div>`;
+                } else {
+                    out.innerHTML = `<div class="error-box">Yapay zekadan boş cevap geldi. Lütfen API anahtarını Google AI Studio'dan tekrar alıp dene.</div>`;
+                }
 
-  try {
-    const response = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
-      })
-    });
-
-    const data = await response.json();
-    const rawText = data.candidates[0].content.parts[0].text;
-    const cleanJson = JSON.parse(rawText.replace(/```json|```/g, '').trim());
-
-    contentDiv.innerHTML = `
-      <h3 class="ai-analysis-headline">${cleanJson.headline}</h3>
-      <div style="color:rgba(245,242,235,0.8); font-size:1.1rem; line-height:1.8;">${cleanJson.text}</div>
-    `;
-    
-    document.getElementById('bullBar').style.width = cleanJson.bullScore + '%';
-    document.getElementById('bullPct').textContent = 'Yükseliş Beklentisi: %' + cleanJson.bullScore;
-
-  } catch (err) {
-    alert('Hata oluştu: ' + err.message);
-    console.error(err);
-  }
-}
-</script>
+            } catch (e) {
+                out.innerHTML = `<div class="error-box">Bağlantı hatası oluştu: ${e.message}</div>`;
+            }
+        }
+    </script>
 </body>
 </html>
