@@ -8,1420 +8,154 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --black: #0a0a08;
-    --cream: #f5f2eb;
-    --gold: #c9a84c;
-    --gold-light: #e8d08a;
-    --red: #c23b22;
-    --green: #1d7a4a;
-    --text: #1a1a16;
-    --muted: #6b6b60;
-    --border: rgba(10,10,8,0.12);
-    --font-display: 'Playfair Display', Georgia, serif;
+    --black: #0a0a08; --cream: #f5f2eb; --gold: #c9a84c; --gold-light: #e8d08a;
+    --red: #c23b22; --green: #1d7a4a; --text: #1a1a16; --muted: #6b6b60;
+    --border: rgba(10,10,8,0.12); --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'DM Sans', sans-serif;
   }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: var(--font-body);
-    background: var(--cream);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(245,242,235,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--black);
-    text-decoration: none;
-  }
-
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text); line-height: 1.6; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(245,242,235,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; color: var(--black); text-decoration: none; }
   .nav-logo span { color: var(--gold); }
-
-  .nav-links {
-    display: flex; gap: 2.5rem; list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--black); }
-
-  .nav-cta {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.4rem;
-    background: var(--black);
-    color: var(--cream);
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .nav-cta:hover { background: #2a2a22; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 5rem;
-  }
-
-  .hero-left {
-    padding: 6rem 4rem 4rem;
-    display: flex; flex-direction: column; justify-content: center;
-    border-right: 0.5px solid var(--border);
-  }
-
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-
-  .hero-tag::before {
-    content: '';
-    width: 2rem; height: 1px;
-    background: var(--gold);
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: var(--black);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero-desc {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--muted);
-    max-width: 32ch;
-    margin-bottom: 3rem;
-    line-height: 1.7;
-  }
-
-  .hero-actions {
+  .hero { min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; border-bottom: 0.5px solid var(--border); }
+  .hero-left { padding: 6rem 4rem; border-right: 0.5px solid var(--border); }
+  .hero-title { font-family: var(--font-display); font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  
+  /* AI ANALİZ PANELİ - BURASI GÜNCELLENDİ */
+  .ai-analysis-section { background: var(--black); padding: 5rem 4rem; color: var(--cream); }
+  .api-key-setup { 
+    background: rgba(245,242,235,0.06); 
+    border: 1px solid var(--gold); 
+    padding: 2rem; 
+    margin-bottom: 3rem; 
+    border-radius: 4px;
     display: flex; gap: 1rem; align-items: center;
   }
-
-  .btn-primary {
-    padding: 0.9rem 2.2rem;
-    background: var(--black);
-    color: var(--cream);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border: none; cursor: pointer; text-decoration: none;
-    transition: background 0.2s;
-  }
-
-  .btn-primary:hover { background: var(--gold); color: var(--black); }
-
-  .btn-ghost {
-    padding: 0.9rem 2.2rem;
-    background: transparent;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border: 0.5px solid var(--border); cursor: pointer; text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .btn-ghost:hover { border-color: var(--black); color: var(--black); }
-
-  .hero-right {
-    padding: 6rem 4rem 4rem;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-
-  .ticker-strip {
-    background: var(--black);
-    color: var(--cream);
-    padding: 1rem 1.5rem;
-    margin-bottom: 2rem;
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-
-  .ticker-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.4);
-  }
-
-  .ticker-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.6rem 0;
-    border-bottom: 0.5px solid rgba(245,242,235,0.1);
-  }
-
-  .ticker-row:last-child { border-bottom: none; }
-
-  .ticker-name {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-
-  .ticker-value {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .ticker-change {
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.2rem 0.5rem;
-  }
-
-  .up { color: #4ade80; }
-  .down { color: #f87171; }
-
-  .featured-article {
-    border: 0.5px solid var(--border);
-    padding: 2rem;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    text-decoration: none; display: block; color: inherit;
-  }
-
-  .featured-article:hover { border-color: var(--gold); }
-
-  .article-category {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .article-title-sm {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 0.75rem;
-    color: var(--black);
-  }
-
-  .article-meta {
-    font-size: 0.78rem;
-    color: var(--muted);
-    display: flex; gap: 1rem;
-  }
-
-  /* TICKER TICKER */
-  .live-ticker {
-    background: var(--black);
-    padding: 0.7rem 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .ticker-scroll {
-    display: inline-block;
-    animation: scroll-left 30s linear infinite;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--cream);
-  }
-
-  .ticker-scroll span {
-    margin: 0 2rem;
-    opacity: 0.6;
-  }
-
-  .ticker-scroll .tk-up { color: #4ade80; opacity: 1; }
-  .ticker-scroll .tk-dn { color: #f87171; opacity: 1; }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SECTION */
-  .section {
-    padding: 5rem 4rem;
-  }
-
-  .section-header {
-    display: flex; align-items: baseline; justify-content: space-between;
-    margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--black);
-  }
-
-  .section-link {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem;
-    transition: color 0.2s;
-  }
-
-  .section-link:hover { color: var(--black); }
-
-  /* ARTICLES GRID */
-  .articles-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 0;
-  }
-
-  .article-card {
-    border: 0.5px solid var(--border);
-    margin: -0.5px;
-    padding: 2rem;
-    display: flex; flex-direction: column;
-    text-decoration: none; color: inherit;
-    transition: background 0.2s;
-  }
-
-  .article-card:hover { background: rgba(201,168,76,0.05); }
-
-  .article-card.featured { grid-row: span 2; }
-
-  .card-category {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .card-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--black);
-    margin-bottom: auto;
-    padding-bottom: 1.5rem;
-  }
-
-  .article-card.featured .card-title { font-size: 1.8rem; }
-  .article-card:not(.featured) .card-title { font-size: 1.1rem; }
-
-  .card-excerpt {
-    font-size: 0.88rem;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .card-footer {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 1.5rem;
-    border-top: 0.5px solid var(--border);
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
-  .card-author { font-weight: 500; }
-
-  /* OPINION SECTION */
-  .opinion-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-  }
-
-  .opinion-card {
-    border: 0.5px solid var(--border);
-    margin: -0.5px;
-    padding: 2.5rem 2rem;
-    text-decoration: none; color: inherit;
-    display: flex; flex-direction: column; gap: 1rem;
-    transition: background 0.2s;
-  }
-
-  .opinion-card:hover { background: rgba(201,168,76,0.05); }
-
-  .opinion-number {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 900;
-    color: rgba(10,10,8,0.08);
-    line-height: 1;
-  }
-
-  .opinion-title {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--black);
-  }
-
-  .opinion-author {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 0.5px solid var(--border);
-  }
-
-  /* NEWSLETTER */
-  .newsletter {
-    background: var(--black);
-    padding: 5rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .nl-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 900;
-    color: var(--cream);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  .nl-title em { color: var(--gold); font-style: italic; }
-
-  .nl-desc {
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: rgba(245,242,235,0.55);
-    margin-top: 1.5rem;
-    line-height: 1.7;
-  }
-
-  .nl-form {
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-
-  .nl-input {
-    padding: 1rem 1.5rem;
-    background: rgba(245,242,235,0.08);
-    border: 0.5px solid rgba(245,242,235,0.2);
-    color: var(--cream);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .nl-input::placeholder { color: rgba(245,242,235,0.35); }
-  .nl-input:focus { border-color: var(--gold); }
-
-  .nl-submit {
-    padding: 1rem 2.5rem;
-    background: var(--gold);
-    color: var(--black);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: none; cursor: pointer;
-    transition: background 0.2s;
-    align-self: flex-start;
-  }
-
-  .nl-submit:hover { background: var(--gold-light); }
-
-  .nl-privacy {
-    font-size: 0.72rem;
-    color: rgba(245,242,235,0.3);
-    margin-top: 0.5rem;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--black);
-    border-top: 0.5px solid rgba(245,242,235,0.1);
-    padding: 3rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-
-  .footer-logo {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: var(--cream);
-    text-decoration: none;
-  }
-
-  .footer-logo span { color: var(--gold); }
-
-  .footer-links {
-    display: flex; gap: 2rem; list-style: none;
-  }
-
-  .footer-links a {
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.4);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-links a:hover { color: var(--cream); }
-
-  .footer-copy {
-    font-size: 0.72rem;
-    color: rgba(245,242,235,0.25);
-  }
-
-  /* AI ANALİZ BÖLÜMÜ */
-  .ai-analysis-section {
-    background: var(--black);
-    padding: 5rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ai-analysis-section::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
-  .ai-section-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 2.5rem;
-  }
-
-  .ai-section-left {
-    display: flex; flex-direction: column; gap: 0.4rem;
-  }
-
-  .ai-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  .ai-badge-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    animation: pulse-dot 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
-
-  .ai-section-title {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--cream);
-    letter-spacing: -0.02em;
-  }
-
-  .ai-refresh-btn {
-    display: flex; align-items: center; gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: transparent;
-    border: 0.5px solid rgba(201,168,76,0.4);
-    color: var(--gold);
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .ai-refresh-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
-  .ai-refresh-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .ai-refresh-btn .refresh-icon {
-    display: inline-block;
-    transition: transform 0.6s ease;
-  }
-
-  .ai-refresh-btn.spinning .refresh-icon {
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .ai-content-grid {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 2rem;
-  }
-
-  /* MAIN ANALYSIS CARD */
-  .ai-main-card {
-    border: 0.5px solid rgba(245,242,235,0.12);
-    padding: 2.5rem;
-    position: relative;
-  }
-
-  .ai-main-card-header {
-    display: flex; align-items: baseline; justify-content: space-between;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 0.5px solid rgba(245,242,235,0.1);
-  }
-
-  .ai-analysis-date {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.35);
-  }
-
-  .ai-model-tag {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    padding: 0.2rem 0.6rem;
-    border: 0.5px solid rgba(201,168,76,0.3);
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .ai-analysis-headline {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--cream);
-    margin-bottom: 1.25rem;
-  }
-
-  .ai-analysis-body {
-    font-size: 0.92rem;
-    font-weight: 300;
-    line-height: 1.85;
-    color: rgba(245,242,235,0.65);
-  }
-
-  .ai-analysis-body p { margin-bottom: 1rem; }
-  .ai-analysis-body p:last-child { margin-bottom: 0; }
-
-  /* SKELETON LOADING */
-  .skeleton {
-    background: rgba(245,242,235,0.06);
-    border-radius: 2px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skeleton::after {
-    content: '';
-    position: absolute; top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(245,242,235,0.05), transparent);
-    animation: shimmer 1.8s ease-in-out infinite;
-  }
-
-  @keyframes shimmer { to { left: 100%; } }
-
-  .skeleton-line { height: 14px; margin-bottom: 10px; border-radius: 2px; }
-  .skeleton-title { height: 22px; margin-bottom: 16px; width: 75%; border-radius: 2px; }
-  .skeleton-short { width: 40%; }
-  .skeleton-medium { width: 65%; }
-  .skeleton-full { width: 100%; }
-
-  /* KEY POINTS */
-  .ai-key-points {
-    margin-top: 1.75rem;
-    padding-top: 1.75rem;
-    border-top: 0.5px solid rgba(245,242,235,0.1);
-    display: flex; flex-direction: column; gap: 0.75rem;
-  }
-
-  .ai-key-points-label {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.3);
-    margin-bottom: 0.25rem;
-  }
-
-  .key-point {
-    display: flex; gap: 0.75rem; align-items: flex-start;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: rgba(245,242,235,0.7);
-    line-height: 1.5;
-  }
-
-  .key-point-bullet {
-    width: 16px; height: 16px;
-    border: 0.5px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 0.6rem;
-    color: var(--gold);
-    font-weight: 700;
-  }
-
-  /* SIDEBAR CARDS */
-  .ai-sidebar {
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-
-  .ai-side-card {
-    border: 0.5px solid rgba(245,242,235,0.1);
-    padding: 1.5rem;
-  }
-
-  .ai-side-card-label {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.3);
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 0.5px solid rgba(245,242,235,0.08);
-  }
-
-  .sentiment-display {
-    display: flex; flex-direction: column; gap: 0.75rem;
-  }
-
-  .sentiment-item {
-    display: flex; align-items: center; gap: 0.75rem;
-    font-size: 0.82rem;
-    color: rgba(245,242,235,0.6);
-  }
-
-  .sentiment-bar-bg {
-    flex: 1; height: 3px;
-    background: rgba(245,242,235,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .sentiment-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 1s ease;
-  }
-
-  .sentiment-bar-fill.bull { background: #4ade80; }
-  .sentiment-bar-fill.bear { background: #f87171; }
-  .sentiment-bar-fill.neutral { background: rgba(201,168,76,0.8); }
-
-  .sentiment-pct {
-    font-size: 0.72rem;
-    font-weight: 500;
-    min-width: 30px;
-    text-align: right;
-    color: rgba(245,242,235,0.4);
-  }
-
-  .ai-sector-list {
-    display: flex; flex-direction: column; gap: 0.5rem;
-  }
-
-  .sector-item {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.8rem;
-    color: rgba(245,242,235,0.6);
-    padding: 0.4rem 0;
-    border-bottom: 0.5px solid rgba(245,242,235,0.06);
-  }
-
-  .sector-item:last-child { border-bottom: none; }
-
-  .sector-signal {
-    font-size: 0.68rem;
-    font-weight: 500;
-    padding: 0.15rem 0.5rem;
-    letter-spacing: 0.06em;
-  }
-
-  .sig-buy { color: #4ade80; border: 0.5px solid rgba(74,222,128,0.3); }
-  .sig-watch { color: var(--gold); border: 0.5px solid rgba(201,168,76,0.3); }
-  .sig-caution { color: #f87171; border: 0.5px solid rgba(248,113,113,0.3); }
-
-  /* API KEY INPUT */
-  .api-key-setup {
-    background: rgba(245,242,235,0.04);
-    border: 0.5px solid rgba(245,242,235,0.12);
-    padding: 2rem;
-    margin-bottom: 2rem;
-    display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
-  }
-
-  .api-key-setup label {
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.5);
-    flex-shrink: 0;
-  }
-
-  .api-key-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.6rem 1rem;
-    background: rgba(245,242,235,0.06);
-    border: 0.5px solid rgba(245,242,235,0.15);
-    color: var(--cream);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .api-key-input:focus { border-color: var(--gold); }
-  .api-key-input::placeholder { color: rgba(245,242,235,0.2); font-family: monospace; }
-
-  .api-key-save {
-    padding: 0.6rem 1.4rem;
-    background: var(--gold);
-    color: var(--black);
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: none; cursor: pointer;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-
-  .api-key-save:hover { background: var(--gold-light); }
-
-  .api-status {
-    font-size: 0.72rem;
-    width: 100%;
-    margin-top: 0.25rem;
-  }
-
-  .api-status.ok { color: #4ade80; }
-  .api-status.err { color: #f87171; }
-
-  .ai-error-state {
-    text-align: center;
-    padding: 3rem 2rem;
-  }
-
-  .ai-error-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .ai-error-title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--cream);
-    margin-bottom: 0.5rem;
-  }
-
-  .ai-error-desc {
-    font-size: 0.85rem;
-    color: rgba(245,242,235,0.4);
-    line-height: 1.6;
-  }
-
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left, .hero-right { padding: 3rem 1.5rem; }
-    .hero-right { border-top: 0.5px solid var(--border); }
-    .section { padding: 3rem 1.5rem; }
-    .articles-grid { grid-template-columns: 1fr; }
-    .article-card.featured { grid-row: span 1; }
-    .opinion-grid { grid-template-columns: 1fr; }
-    .newsletter { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
-    .ai-analysis-section { padding: 3rem 1.5rem; }
-    .ai-content-grid { grid-template-columns: 1fr; }
-    .ai-section-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
-    .api-key-setup { flex-direction: column; align-items: flex-start; }
-    .api-key-input { min-width: 100%; }
-  }
+  .api-key-input { 
+    flex: 1; padding: 0.8rem; background: #1a1a16; border: 1px solid #333; 
+    color: white; font-family: monospace; outline: none;
+  }
+  .api-key-save { 
+    padding: 0.8rem 2rem; background: var(--gold); color: black; 
+    border: none; cursor: pointer; font-weight: bold; text-transform: uppercase;
+  }
+  .ai-content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
+  .ai-main-card { border: 1px solid rgba(245,242,235,0.1); padding: 2rem; }
+  .ai-analysis-headline { font-family: var(--font-display); font-size: 2rem; margin-bottom: 1.5rem; color: var(--gold); }
+  .skeleton { background: #222; height: 20px; margin-bottom: 10px; border-radius: 4px; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 0.8; } 100% { opacity: 0.5; } }
+  
+  @media (max-width: 900px) { .hero, .ai-content-grid { grid-template-columns: 1fr; } .hero-left { border-right: none; } nav { padding: 1rem; } }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Kapit<span>a</span>l</a>
-  <ul class="nav-links">
-    <li><a href="#">Piyasalar</a></li>
-    <li><a href="#">Ekonomi</a></li>
-    <li><a href="#">Yatırım</a></li>
-    <li><a href="#">Analiz</a></li>
-    <li><a href="#">Köşe Yazıları</a></li>
-  </ul>
-  <a href="#newsletter" class="nav-cta">Abone Ol</a>
+  <a href="#" class="nav-logo">Kapit<span>a</span>l</a>
+  <div style="display:flex; gap: 2rem;">
+    <a href="#ai-analysis" style="text-decoration:none; color:var(--muted); font-size:0.8rem; font-weight:bold; text-transform:uppercase;">AI Analiz</a>
+    <a href="#newsletter" style="text-decoration:none; background:var(--black); color:white; padding: 0.5rem 1rem; font-size:0.8rem;">Abone Ol</a>
+  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-tag">Günlük Finans Analizi</div>
+    <div style="color:var(--gold); font-size:0.7rem; font-weight:bold; letter-spacing:2px; margin-bottom:1rem;">GÜNLÜK FİNANS</div>
     <h1 class="hero-title">Piyasaları<br><em>anlayan</em><br>okursunuz.</h1>
-    <p class="hero-desc">Derin analizler, uzman görüşleri ve piyasa verileriyle finansal kararlarınızı güçlendirin.</p>
-    <div class="hero-actions">
-      <a href="#articles" class="btn-primary">Makaleleri Keşfet</a>
-      <a href="#newsletter" class="btn-ghost">Bülten</a>
-    </div>
+    <p style="color:var(--muted); max-width:400px; margin-bottom:2rem;">Wall Street standartlarında analizler ve yapay zeka destekli piyasa yorumları.</p>
   </div>
-
-  <div class="hero-right">
-    <div class="ticker-strip">
-      <div class="ticker-label">Canlı Piyasalar — 09 Nisan 2026</div>
-      <div class="ticker-row">
-        <span class="ticker-name">BIST 100</span>
-        <span class="ticker-value">9.847,32</span>
-        <span class="ticker-change up">▲ %1,24</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-name">USD/TRY</span>
-        <span class="ticker-value">38,42</span>
-        <span class="ticker-change down">▼ %0,31</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-name">ALTIN (gr)</span>
-        <span class="ticker-value">3.142 ₺</span>
-        <span class="ticker-change up">▲ %0,87</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-name">S&P 500</span>
-        <span class="ticker-value">5.201,14</span>
-        <span class="ticker-change down">▼ %0,52</span>
-      </div>
-    </div>
-
-    <a href="article.html" class="featured-article">
-      <div class="article-category">Öne Çıkan Yazı</div>
-      <div class="article-title-sm">Fed'in Faiz Kararı Sonrası Gelişen Piyasalarda Ne Beklemeliyiz?</div>
-      <div class="article-meta">
-        <span>Dr. Ayşe Kara</span>
-        <span>8 dk okuma</span>
-        <span>Bugün</span>
-      </div>
-    </a>
+  <div style="padding: 6rem 4rem; background: #eee; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.5rem; text-align:center;">
+    BIST 100: 9.847,32 <span style="color:green; margin-left:10px;">▲ %1,24</span>
   </div>
 </section>
 
-<!-- LIVE TICKER -->
-<div class="live-ticker">
-  <span class="ticker-scroll">
-    THYAO <span class="tk-up">▲ %2,1 · 184,40 ₺</span> &nbsp;|&nbsp;
-    EREGL <span class="tk-dn">▼ %0,8 · 48,22 ₺</span> &nbsp;|&nbsp;
-    SASA <span class="tk-up">▲ %3,4 · 127,60 ₺</span> &nbsp;|&nbsp;
-    GARAN <span class="tk-up">▲ %1,1 · 94,30 ₺</span> &nbsp;|&nbsp;
-    AKBNK <span class="tk-dn">▼ %0,4 · 62,10 ₺</span> &nbsp;|&nbsp;
-    KCHOL <span class="tk-up">▲ %0,9 · 211,80 ₺</span> &nbsp;|&nbsp;
-    BTC/USD <span class="tk-up">▲ %4,2 · 87.340 $</span> &nbsp;|&nbsp;
-    EUR/USD <span class="tk-dn">▼ %0,2 · 1,0831</span> &nbsp;|&nbsp;
-    BRENT <span class="tk-up">▲ %1,3 · 74,50 $</span> &nbsp;|&nbsp;
-    THYAO <span class="tk-up">▲ %2,1 · 184,40 ₺</span> &nbsp;|&nbsp;
-    EREGL <span class="tk-dn">▼ %0,8 · 48,22 ₺</span> &nbsp;|&nbsp;
-    SASA <span class="tk-up">▲ %3,4 · 127,60 ₺</span> &nbsp;|&nbsp;
-    GARAN <span class="tk-up">▲ %1,1 · 94,30 ₺</span> &nbsp;|&nbsp;
-    AKBNK <span class="tk-dn">▼ %0,4 · 62,10 ₺</span> &nbsp;|&nbsp;
-    KCHOL <span class="tk-up">▲ %0,9 · 211,80 ₺</span> &nbsp;|&nbsp;
-    BTC/USD <span class="tk-up">▲ %4,2 · 87.340 $</span> &nbsp;|&nbsp;
-    EUR/USD <span class="tk-dn">▼ %0,2 · 1,0831</span> &nbsp;|&nbsp;
-    BRENT <span class="tk-up">▲ %1,3 · 74,50 $</span>
-  </span>
-</div>
-
-<!-- AI GÜNLÜK ANALİZ -->
 <section class="ai-analysis-section" id="ai-analysis">
-  <div class="ai-section-header">
-    <div class="ai-section-left">
-      <div class="ai-badge">
-        <span class="ai-badge-dot"></span>
-        Yapay Zeka ile Güçlendirilmiş
-      </div>
-      <h2 class="ai-section-title">Günün Finans Analizi</h2>
-    </div>
-    <button class="ai-refresh-btn" id="refreshBtn" onclick="fetchAnalysis(true)">
-      <span class="refresh-icon">↻</span> Yenile
-    </button>
-  </div>
-
-  <!-- API KEY SETUP -->
+  <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:2rem;">Günün Finans Analizi</h2>
+  
   <div class="api-key-setup" id="apiKeySetup">
-    <label>Google AI Studio API Anahtarı</label>
-    <input class="api-key-input" type="password" id="apiKeyInput" placeholder="AIzaSy..." autocomplete="off">
-    <button class="api-key-save" onclick="saveApiKey()">Kaydet & Başlat</button>
-    <div class="api-status" id="apiStatus"></div>
+    <div style="flex-shrink:0;">
+       <div style="font-size:0.7rem; color:var(--gold); font-weight:bold;">GOOGLE AI STUDIO ANAHTARI</div>
+    </div>
+    <input class="api-key-input" type="password" id="apiKeyInput" placeholder="AIzaSy... ile başlayan anahtarı buraya yapıştırın">
+    <button class="api-key-save" onclick="saveApiKey()">Analizi Başlat</button>
   </div>
 
-  <div class="ai-content-grid" id="aiContentGrid">
-
-    <!-- MAIN ANALYSIS -->
-    <div class="ai-main-card">
-      <div class="ai-main-card-header">
-        <span class="ai-analysis-date" id="analysisDate">—</span>
-        <span class="ai-model-tag">Gemini 2.0 Flash</span>
-      </div>
-      <div id="analysisContent">
-        <div class="ai-analysis-headline skeleton skeleton-title" style="height:28px; width:80%; margin-bottom:16px;"></div>
-        <div class="ai-analysis-body">
-          <div class="skeleton skeleton-line skeleton-full"></div>
-          <div class="skeleton skeleton-line skeleton-full"></div>
-          <div class="skeleton skeleton-line skeleton-medium"></div>
-          <br>
-          <div class="skeleton skeleton-line skeleton-full"></div>
-          <div class="skeleton skeleton-line skeleton-short"></div>
-        </div>
-        <div class="ai-key-points" style="margin-top:1.5rem;">
-          <div class="skeleton skeleton-line" style="width:120px; margin-bottom:12px;"></div>
-          <div class="skeleton skeleton-line skeleton-full"></div>
-          <div class="skeleton skeleton-line skeleton-medium"></div>
-          <div class="skeleton skeleton-line" style="width:55%;"></div>
-        </div>
-      </div>
+  <div class="ai-content-grid">
+    <div class="ai-main-card" id="analysisContent">
+      <div class="skeleton" style="width:80%; height:40px;"></div>
+      <div class="skeleton" style="width:100%;"></div>
+      <div class="skeleton" style="width:90%;"></div>
+      <div class="skeleton" style="width:95%;"></div>
+      <p style="color: #666; margin-top: 2rem;">API Anahtarınızı yukarıya girip "Analizi Başlat" dediğinizde Gemini buraya özel analizini yazacaktır.</p>
     </div>
-
-    <!-- SIDEBAR -->
+    
     <div class="ai-sidebar">
-
-      <div class="ai-side-card">
-        <div class="ai-side-card-label">Piyasa Duyarlılığı</div>
-        <div class="sentiment-display" id="sentimentDisplay">
-          <div class="sentiment-item">
-            <span style="min-width:52px; font-size:0.75rem;">Yükseliş</span>
-            <div class="sentiment-bar-bg"><div class="sentiment-bar-fill bull" id="bullBar" style="width:0%"></div></div>
-            <span class="sentiment-pct" id="bullPct">—</span>
-          </div>
-          <div class="sentiment-item">
-            <span style="min-width:52px; font-size:0.75rem;">Düşüş</span>
-            <div class="sentiment-bar-bg"><div class="sentiment-bar-fill bear" id="bearBar" style="width:0%"></div></div>
-            <span class="sentiment-pct" id="bearPct">—</span>
-          </div>
-          <div class="sentiment-item">
-            <span style="min-width:52px; font-size:0.75rem;">Nötr</span>
-            <div class="sentiment-bar-bg"><div class="sentiment-bar-fill neutral" id="neutralBar" style="width:0%"></div></div>
-            <span class="sentiment-pct" id="neutralPct">—</span>
-          </div>
+      <div style="border:1px solid #333; padding:1.5rem;">
+        <h4 style="color:var(--gold); font-size:0.8rem; margin-bottom:1rem;">PİYASA DUYARLILIĞI</h4>
+        <div style="height:10px; background:#222; border-radius:10px; overflow:hidden;">
+          <div id="bullBar" style="width:0%; height:100%; background:green; transition: 1s;"></div>
         </div>
+        <p id="bullPct" style="font-size:0.8rem; margin-top:0.5rem; color:#888;">Yükseliş Beklentisi: --</p>
       </div>
-
-      <div class="ai-side-card">
-        <div class="ai-side-card-label">Sektör Sinyalleri</div>
-        <div class="ai-sector-list" id="sectorList">
-          <div class="sector-item"><span class="skeleton skeleton-line" style="width:80px;height:12px;"></span><span class="skeleton skeleton-line" style="width:40px;height:12px;"></span></div>
-          <div class="sector-item"><span class="skeleton skeleton-line" style="width:70px;height:12px;"></span><span class="skeleton skeleton-line" style="width:40px;height:12px;"></span></div>
-          <div class="sector-item"><span class="skeleton skeleton-line" style="width:90px;height:12px;"></span><span class="skeleton skeleton-line" style="width:40px;height:12px;"></span></div>
-          <div class="sector-item"><span class="skeleton skeleton-line" style="width:75px;height:12px;"></span><span class="skeleton skeleton-line" style="width:40px;height:12px;"></span></div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
-
-<!-- SON YAZILAR -->
-<section class="section" id="articles">
-  <div class="section-header">
-    <h2 class="section-title">Son Yazılar</h2>
-    <a href="#" class="section-link">Tümünü Gör →</a>
-  </div>
-
-  <div class="articles-grid">
-    <a href="article.html" class="article-card featured">
-      <div class="card-category">Makroekonomi</div>
-      <h3 class="card-title">Enflasyonla Mücadelede Merkez Bankalarının Sınırları: 2026 Perspektifi</h3>
-      <p class="card-excerpt">Küresel merkez bankaları faiz indirimi sürecine girerken, enflasyonla mücadelenin yeni bir evreye girdiği görülüyor. Bu yazıda para politikasının etkinliğini ve önümüzdeki dönemde bizi nelerin beklediğini inceliyoruz.</p>
-      <div class="card-footer">
-        <span class="card-author">Prof. Mehmet Yılmaz</span>
-        <span>12 dk okuma · 8 Nisan</span>
-      </div>
-    </a>
-
-    <a href="article.html" class="article-card">
-      <div class="card-category">Borsa</div>
-      <h3 class="card-title">BIST'te Yabancı Yatırımcı Hamlesi</h3>
-      <div class="card-footer">
-        <span class="card-author">Selin Arslan</span>
-        <span>5 dk · Bugün</span>
-      </div>
-    </a>
-
-    <a href="article.html" class="article-card">
-      <div class="card-category">Kripto</div>
-      <h3 class="card-title">Bitcoin'in 90.000 Dolar Direnci ve Kurumsal Talep</h3>
-      <div class="card-footer">
-        <span class="card-author">Can Öztürk</span>
-        <span>6 dk · Dün</span>
-      </div>
-    </a>
-
-    <a href="article.html" class="article-card">
-      <div class="card-category">Gayrimenkul</div>
-      <h3 class="card-title">İstanbul Konut Piyasasında Satın Alma mı, Kira mı?</h3>
-      <div class="card-footer">
-        <span class="card-author">Zeynep Çelik</span>
-        <span>7 dk · 7 Nisan</span>
-      </div>
-    </a>
-
-    <a href="article.html" class="article-card">
-      <div class="card-category">Döviz</div>
-      <h3 class="card-title">Türk Lirası'nda Yeni Denge Arayışı</h3>
-      <div class="card-footer">
-        <span class="card-author">Dr. Ayşe Kara</span>
-        <span>4 dk · 6 Nisan</span>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- KÖŞE YAZILARI -->
-<section class="section" style="padding-top: 0;">
-  <div class="section-header">
-    <h2 class="section-title">Köşe Yazıları</h2>
-    <a href="#" class="section-link">Tüm Yazarlar →</a>
-  </div>
-
-  <div class="opinion-grid">
-    <a href="article.html" class="opinion-card">
-      <div class="opinion-number">01</div>
-      <div class="opinion-title">Yapay Zeka Borsaları Nasıl Değiştiriyor?</div>
-      <p style="font-size: 0.85rem; color: var(--muted); font-weight: 300;">Algoritmik ticaretin yeni boyutu ve bireysel yatırımcıya etkisi üzerine bir analiz.</p>
-      <div class="opinion-author">Prof. Mehmet Yılmaz — Ekonomi Editörü</div>
-    </a>
-
-    <a href="article.html" class="opinion-card">
-      <div class="opinion-number">02</div>
-      <div class="opinion-title">ESG Yatırımları Gerçekten İşe Yarıyor mu?</div>
-      <p style="font-size: 0.85rem; color: var(--muted); font-weight: 300;">Sürdürülebilir finansın performansını verilere dayalı olarak değerlendiriyoruz.</p>
-      <div class="opinion-author">Selin Arslan — Borsa Analisti</div>
-    </a>
-
-    <a href="article.html" class="opinion-card">
-      <div class="opinion-number">03</div>
-      <div class="opinion-title">Gençlerin Yatırım Alışkanlıkları Değişiyor</div>
-      <p style="font-size: 0.85rem; color: var(--muted); font-weight: 300;">Z kuşağı tasarruf ve yatırım davranışları üzerine kapsamlı bir inceleme.</p>
-      <div class="opinion-author">Zeynep Çelik — Kişisel Finans</div>
-    </a>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter" id="newsletter">
-  <div>
-    <h2 class="nl-title">Her sabah<br><em>piyasalara</em><br>hazır olun.</h2>
-    <p class="nl-desc">Günlük finans bülteni ile sabah kahvenizle birlikte piyasaları, ekonomik gelişmeleri ve uzman analizleri alın. 50.000+ okuyucu zaten abone.</p>
-  </div>
-
-  <div class="nl-form">
-    <input class="nl-input" type="text" placeholder="Ad Soyad">
-    <input class="nl-input" type="email" placeholder="E-posta adresiniz">
-    <button class="nl-submit">Ücretsiz Abone Ol</button>
-    <p class="nl-privacy">Gizliliğinize saygı duyuyoruz. İstediğiniz zaman abonelikten çıkabilirsiniz.</p>
-  </div>
-</section>
-
-<footer>
-  <a href="index.html" class="footer-logo">Kapit<span>a</span>l</a>
-  <ul class="footer-links">
-    <li><a href="#">Hakkımızda</a></li>
-    <li><a href="#">Yazarlar</a></li>
-    <li><a href="#">Reklam</a></li>
-    <li><a href="#">Gizlilik</a></li>
-    <li><a href="#">İletişim</a></li>
-  </ul>
-  <span class="footer-copy">© 2026 Kapital. Tüm hakları saklıdır.</span>
-</footer>
 
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
 const GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-const CACHE_KEY       = 'kapital_ai_analysis_v1';
-const CACHE_DATE_KEY  = 'kapital_ai_analysis_date_v1';
-const API_KEY_STORE   = 'kapital_gemini_api_key';
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
+// Sayfa yüklendiğinde eski anahtar varsa kutuya yaz
 document.addEventListener('DOMContentLoaded', () => {
-  const storedKey = localStorage.getItem(API_KEY_STORE);
-  if (storedKey) {
-    document.getElementById('apiKeyInput').value = storedKey;
-    document.getElementById('apiKeySetup').style.display = 'none';
-    fetchAnalysis(false);
+  const savedKey = localStorage.getItem('kapital_api_key');
+  if (savedKey) {
+    document.getElementById('apiKeyInput').value = savedKey;
   }
 });
 
-// ─── API KEY ──────────────────────────────────────────────────────────────────
 function saveApiKey() {
   const key = document.getElementById('apiKeyInput').value.trim();
-  const status = document.getElementById('apiStatus');
-  if (!key.startsWith('AIza') || key.length < 30) {
-    status.className = 'api-status err';
-    status.textContent = '⚠ Geçersiz API anahtarı. Google AI Studio\'dan aldığınız anahtarı girin.';
+  if (!key.startsWith('AIza')) {
+    alert('Lütfen geçerli bir Google AI Studio API anahtarı girin!');
     return;
   }
-  localStorage.setItem(API_KEY_STORE, key);
-  status.className = 'api-status ok';
-  status.textContent = '✓ Anahtar kaydedildi. Analiz yükleniyor...';
-  setTimeout(() => {
-    document.getElementById('apiKeySetup').style.display = 'none';
-    fetchAnalysis(true);
-  }, 800);
+  localStorage.setItem('kapital_api_key', key);
+  fetchAnalysis(key);
 }
 
-// Enter key support
-document.getElementById('apiKeyInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') saveApiKey();
-});
+async function fetchAnalysis(apiKey) {
+  const contentDiv = document.getElementById('analysisContent');
+  contentDiv.innerHTML = '<div class="skeleton" style="width:100%;"></div><div class="skeleton" style="width:90%;"></div><p>Gemini verileri analiz ediyor, lütfen bekleyin...</p>';
 
-// ─── CACHE CHECK ──────────────────────────────────────────────────────────────
-function isCacheValid() {
-  const today     = new Date().toDateString();
-  const cacheDate = localStorage.getItem(CACHE_DATE_KEY);
-  const cached    = localStorage.getItem(CACHE_KEY);
-  return cacheDate === today && cached;
-}
-
-// ─── FETCH ANALYSIS ───────────────────────────────────────────────────────────
-async function fetchAnalysis(forceRefresh = false) {
-  const apiKey = localStorage.getItem(API_KEY_STORE);
-  if (!apiKey) return;
-
-  // Cache hit → render cached data without calling API
-  if (!forceRefresh && isCacheValid()) {
-    const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
-    renderAnalysis(cached);
-    return;
-  }
-
-  setLoadingState(true);
-
-  const today     = new Date();
-  const dateStr   = today.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
-  const dayOfWeek = today.toLocaleDateString('tr-TR', { weekday: 'long' });
-
-  const prompt = `Sen Kapital adlı Türk finans haber sitesinin baş ekonomi analistisin.
-Bugünün tarihi: ${dayOfWeek}, ${dateStr}.
-
-Aşağıdaki konularda kapsamlı bir GÜNLÜK FİNANS ANALİZİ hazırla. Yanıt SADECE geçerli JSON formatında olmalı, başka hiçbir metin içermemeli.
-
-JSON yapısı:
-{
-  "headline": "Dikkat çekici, analitik bir başlık (maksimum 15 kelime)",
-  "paragraphs": [
-    "Birinci paragraf: Küresel piyasalardaki genel tablo ve makro ortam (3-4 cümle)",
-    "İkinci paragraf: Türkiye ekonomisi ve BIST özelinde değerlendirme (3-4 cümle)",
-    "Üçüncü paragraf: Yatırımcılar için öne çıkan fırsat veya risk (2-3 cümle)"
-  ],
-  "keyPoints": [
-    "Birinci kritik nokta — kısa ve akılda kalıcı",
-    "İkinci kritik nokta",
-    "Üçüncü kritik nokta",
-    "Dördüncü kritik nokta"
-  ],
-  "sentiment": {
-    "bull": 45,
-    "bear": 30,
-    "neutral": 25
-  },
-  "sectors": [
-    { "name": "Bankacılık", "signal": "buy" },
-    { "name": "Enerji", "signal": "watch" },
-    { "name": "Teknoloji", "signal": "buy" },
-    { "name": "Gayrimenkul", "signal": "caution" },
-    { "name": "Savunma", "signal": "watch" }
-  ]
-}
-
-Kurallar:
-- Tüm metin Türkçe olmalı
-- Gerçekçi, profesyonel finansal dil kullan
-- sentiment değerleri toplamda 100 olmalı
-- signal değerleri sadece "buy", "watch" veya "caution" olabilir
-- Sadece JSON döndür, başka hiçbir şey ekleme`;
+  const prompt = "Sen bir Wall Street analistisin. Bugünün finansal durumu hakkında (BIST, Petrol, Altın) Türkçe, profesyonel ve etkileyici bir analiz yap. Analizini şu JSON formatında ver: { 'headline': 'başlık', 'text': 'analiz metni', 'bullScore': 75 }";
 
   try {
     const response = await fetch(`${GEMINI_ENDPOINT}?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1200 }
+        contents: [{ parts: [{ text: prompt }] }]
       })
     });
 
-    if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error?.message || `HTTP ${response.status}`);
-    }
+    const data = await response.json();
+    const rawText = data.candidates[0].content.parts[0].text;
+    const cleanJson = JSON.parse(rawText.replace(/```json|```/g, '').trim());
 
-    const data    = await response.json();
-    const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-
-    // Strip markdown code fences if present
-    const clean = rawText.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
-
-    // Cache result
-    localStorage.setItem(CACHE_KEY, JSON.stringify(parsed));
-    localStorage.setItem(CACHE_DATE_KEY, new Date().toDateString());
-
-    renderAnalysis(parsed);
+    contentDiv.innerHTML = `
+      <h3 class="ai-analysis-headline">${cleanJson.headline}</h3>
+      <div style="color:rgba(245,242,235,0.8); font-size:1.1rem; line-height:1.8;">${cleanJson.text}</div>
+    `;
+    
+    document.getElementById('bullBar').style.width = cleanJson.bullScore + '%';
+    document.getElementById('bullPct').textContent = 'Yükseliş Beklentisi: %' + cleanJson.bullScore;
 
   } catch (err) {
-    console.error('Gemini API hatası:', err);
-    renderError(err.message);
-  } finally {
-    setLoadingState(false);
+    alert('Hata oluştu: ' + err.message);
+    console.error(err);
   }
 }
-
-// ─── RENDER ───────────────────────────────────────────────────────────────────
-function renderAnalysis(data) {
-  // Date
-  const today   = new Date();
-  const dateStr = today.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
-  document.getElementById('analysisDate').textContent = dateStr;
-
-  // Main content
-  const content = document.getElementById('analysisContent');
-  content.innerHTML = `
-    <h3 class="ai-analysis-headline">${escHtml(data.headline)}</h3>
-    <div class="ai-analysis-body">
-      ${(data.paragraphs || []).map(p => `<p>${escHtml(p)}</p>`).join('')}
-    </div>
-    <div class="ai-key-points">
-      <div class="ai-key-points-label">Kritik Noktalar</div>
-      ${(data.keyPoints || []).map((pt, i) => `
-        <div class="key-point">
-          <span class="key-point-bullet">${i + 1}</span>
-          <span>${escHtml(pt)}</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  // Sentiment bars (animate after small delay)
-  const s = data.sentiment || { bull: 40, bear: 30, neutral: 30 };
-  setTimeout(() => {
-    document.getElementById('bullBar').style.width    = s.bull    + '%';
-    document.getElementById('bearBar').style.width    = s.bear    + '%';
-    document.getElementById('neutralBar').style.width = s.neutral + '%';
-    document.getElementById('bullPct').textContent    = '%' + s.bull;
-    document.getElementById('bearPct').textContent    = '%' + s.bear;
-    document.getElementById('neutralPct').textContent = '%' + s.neutral;
-  }, 200);
-
-  // Sectors
-  const sigLabels = { buy: 'AL', watch: 'İZLE', caution: 'DİKKAT' };
-  const sigClass  = { buy: 'sig-buy', watch: 'sig-watch', caution: 'sig-caution' };
-  document.getElementById('sectorList').innerHTML = (data.sectors || []).map(s => `
-    <div class="sector-item">
-      <span>${escHtml(s.name)}</span>
-      <span class="sector-signal ${sigClass[s.signal] || 'sig-watch'}">${sigLabels[s.signal] || s.signal}</span>
-    </div>
-  `).join('');
-}
-
-function renderError(msg) {
-  document.getElementById('analysisContent').innerHTML = `
-    <div class="ai-error-state">
-      <div class="ai-error-icon">⚠</div>
-      <div class="ai-error-title">Analiz yüklenemedi</div>
-      <div class="ai-error-desc">
-        ${msg.includes('API_KEY') || msg.includes('403')
-          ? 'API anahtarınız geçersiz veya yetkisiz. Lütfen Google AI Studio\'dan yeni bir anahtar alın.'
-          : msg.includes('429')
-          ? 'API istek limiti aşıldı. Lütfen birkaç dakika sonra tekrar deneyin.'
-          : 'Bağlantı hatası: ' + escHtml(msg)
-        }
-      </div>
-    </div>
-  `;
-  document.getElementById('apiKeySetup').style.display = 'flex';
-}
-
-function setLoadingState(loading) {
-  const btn = document.getElementById('refreshBtn');
-  btn.disabled = loading;
-  btn.classList.toggle('spinning', loading);
-}
-
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
 </script>
-
 </body>
 </html>
