@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kapital — Makale Şablonu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a08;
+    --cream: #f5f2eb;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --red: #c23b22;
+    --green: #1d7a4a;
+    --text: #1a1a16;
+    --muted: #6b6b60;
+    --border: rgba(10,10,8,0.12);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(245,242,235,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  .nav-cta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.4rem;
+    background: var(--black);
+    color: var(--cream);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* READ PROGRESS */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    height: 2px;
+    background: var(--gold);
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ARTICLE HEADER */
+  .article-header {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 9rem 2rem 3rem;
+    text-align: center;
+  }
+
+  .breadcrumb {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    text-decoration: none;
+  }
+
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .article-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--gold);
+    padding: 0.3rem 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .article-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+
+  .article-subtitle {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 55ch;
+    margin: 0 auto 2.5rem;
+  }
+
+  .article-byline {
+    display: flex; align-items: center; justify-content: center; gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .author-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .author-info { text-align: left; }
+
+  .author-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .author-role {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .byline-meta {
+    display: flex; gap: 1.5rem;
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .byline-meta span {
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  /* ARTICLE LAYOUT */
+  .article-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 0;
+    max-width: 1140px;
+    margin: 0 auto;
+    border-top: 0.5px solid var(--border);
+  }
+
+  /* MAIN CONTENT */
+  .article-body {
+    padding: 3.5rem 4rem 5rem 2rem;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .article-body p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.75rem;
+  }
+
+  .article-body p:first-child::first-letter {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.85;
+    margin-right: 0.12em;
+    margin-top: 0.08em;
+    color: var(--black);
+  }
+
+  .article-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin: 3rem 0 1.25rem;
+    line-height: 1.2;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--black);
+    margin: 2rem 0 1rem;
+    line-height: 1.3;
+  }
+
+  .article-body blockquote {
+    border-left: 3px solid var(--gold);
+    padding: 1rem 0 1rem 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .article-body blockquote p {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .article-body blockquote p::first-letter { all: unset; }
+
+  .article-body blockquote cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-style: normal;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* DATA CALLOUT */
+  .data-callout {
+    background: var(--black);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .data-item { text-align: center; }
+
+  .data-value {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .data-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.5);
+  }
+
+  /* CHART PLACEHOLDER */
+  .chart-block {
+    border: 0.5px solid var(--border);
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .chart-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-bars {
+    display: flex; align-items: flex-end; gap: 0.5rem;
+    height: 120px;
+  }
+
+  .chart-bar {
+    flex: 1;
+    background: var(--border);
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .chart-bar:hover { background: var(--gold); }
+
+  .chart-bar .bar-fill {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--black);
+    transition: background 0.2s;
+  }
+
+  .chart-bar:hover .bar-fill { background: var(--gold); }
+
+  .chart-labels {
+    display: flex; gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .chart-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  /* TAGS */
+  .article-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin: 3rem 0;
+    padding: 2rem 0;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border: 0.5px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .tag:hover { border-color: var(--black); color: var(--black); }
+
+  /* SHARE */
+  .share-block {
+    margin: 2rem 0;
+  }
+
+  .share-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .share-buttons {
+    display: flex; gap: 0.75rem;
+  }
+
+  .share-btn {
+    padding: 0.55rem 1.2rem;
+    border: 0.5px solid var(--border);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .share-btn:hover { background: var(--black); color: var(--cream); border-color: var(--black); }
+
+  /* SIDEBAR */
+  .article-sidebar {
+    padding: 3.5rem 2rem 3.5rem;
+    display: flex; flex-direction: column; gap: 2.5rem;
+  }
+
+  .sidebar-widget {}
+
+  .widget-title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  /* TICKER SIDEBAR */
+  .ticker-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 0.82rem;
+  }
+
+  .ticker-item:last-child { border-bottom: none; }
+
+  .tk-name { font-weight: 500; }
+  .tk-val { font-family: var(--font-display); font-weight: 700; }
+  .tk-chg { font-size: 0.72rem; font-weight: 500; }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+
+  /* RELATED */
+  .related-item {
+    padding: 1rem 0;
+    border-bottom: 0.5px solid var(--border);
+    text-decoration: none; color: inherit;
+    display: block;
+    transition: opacity 0.2s;
+  }
+
+  .related-item:last-child { border-bottom: none; }
+  .related-item:hover { opacity: 0.7; }
+
+  .related-cat {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .related-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--black);
+    margin-bottom: 0.3rem;
+  }
+
+  .related-meta {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  /* STICKY SIDEBAR */
+  .sidebar-sticky {
+    position: sticky;
+    top: 5.5rem;
+  }
+
+  /* NEWSLETTER SIDEBAR */
+  .nl-sidebar {
+    background: var(--black);
+    padding: 1.5rem;
+  }
+
+  .nl-sidebar-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .nl-sidebar-desc {
+    font-size: 0.8rem;
+    color: rgba(245,242,235,0.5);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .nl-sidebar-input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background: rgba(245,242,235,0.08);
+    border: 0.5px solid rgba(245,242,235,0.2);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    outline: none;
+  }
+
+  .nl-sidebar-input::placeholder { color: rgba(245,242,235,0.3); }
+
+  .nl-sidebar-btn {
+    width: 100%;
+    padding: 0.7rem;
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .nl-sidebar-btn:hover { background: var(--gold-light); }
+
+  /* AUTHOR BIO */
+  .author-bio {
+    background: var(--black);
+    padding: 3rem 4rem;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex; gap: 3rem; align-items: flex-start;
+    border-top: 0.5px solid rgba(245,242,235,0.1);
+  }
+
+  .author-bio-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .author-bio-content {}
+
+  .author-bio-name {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.25rem;
+  }
+
+  .author-bio-role {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .author-bio-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(245,242,235,0.6);
+    line-height: 1.7;
+    max-width: 55ch;
+  }
+
+  /* MORE ARTICLES */
+  .more-articles {
+    padding: 4rem 2rem;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .more-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .more-card {
+    padding: 1.5rem;
+    border: 0.5px solid var(--border);
+    margin: -0.5px;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+    transition: background 0.2s;
+  }
+
+  .more-card:hover { background: rgba(201,168,76,0.05); }
+
+  .more-cat {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .more-card-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--black);
+    margin-bottom: auto;
+    padding-bottom: 1rem;
+  }
+
+  .more-meta {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 0.5px solid rgba(245,242,235,0.1);
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(245,242,235,0.25);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .article-header { padding: 7rem 1.5rem 2rem; }
+    .article-layout { grid-template-columns: 1fr; }
+    .article-body { padding: 2rem 1.5rem; border-right: none; }
+    .article-sidebar { padding: 2rem 1.5rem; border-top: 0.5px solid var(--border); }
+    .data-callout { grid-template-columns: 1fr; gap: 1.5rem; }
+    .author-bio { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+    .more-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Kapit<span>a</span>l</a>
+  <ul class="nav-links">
+    <li><a href="#">Piyasalar</a></li>
+    <li><a href="#">Ekonomi</a></li>
+    <li><a href="#">Yatırım</a></li>
+    <li><a href="#">Analiz</a></li>
+    <li><a href="#">Köşe Yazıları</a></li>
+  </ul>
+  <a href="index.html#newsletter" class="nav-cta">Abone Ol</a>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<header class="article-header">
+  <div class="breadcrumb">
+    <a href="index.html">Ana Sayfa</a>
+    <span>·</span>
+    <span>Makroekonomi</span>
+  </div>
+
+  <div class="article-category">Makroekonomi</div>
+
+  <h1 class="article-title">Enflasyonla Mücadelede Merkez Bankalarının Sınırları: 2026 Perspektifi</h1>
+
+  <p class="article-subtitle">Küresel merkez bankaları faiz indirimi sürecine girerken, para politikasının etkinliği yeni bir sınava giriyor. Bu yazıda önümüzdeki dönemde bizi neler beklediğini inceliyoruz.</p>
+
+  <div class="article-byline">
+    <div class="author-avatar">MY</div>
+    <div class="author-info">
+      <div class="author-name">Prof. Mehmet Yılmaz</div>
+      <div class="author-role">Ekonomi Editörü</div>
+    </div>
+    <div class="byline-meta">
+      <span>8 Nisan 2026</span>
+      <span>12 dk okuma</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE CONTENT + SIDEBAR -->
+<div class="article-layout">
+
+  <main class="article-body">
+
+    <p>Küresel merkez bankalarının 2022–2024 döneminde hayata geçirdiği agresif faiz artışları, enflasyonu önemli ölçüde geri çekmeyi başardı. Ancak bu başarı, beraberinde yeni sorular getiriyor: Para politikası araçları tükenmiş mi, yoksa yeni bir denkleme mi giriyoruz?</p>
+
+    <p>Federal Rezerv, Avrupa Merkez Bankası ve Türkiye Cumhuriyet Merkez Bankası'nın son açıklamaları, faiz indirim süreçlerini yönetmedeki dikkatli tutumlarını ortaya koyuyor. Peki bu ihtiyatlılık gerçekten temkinli bir politika anlayışından mı kaynaklanıyor, yoksa mevcut araçların yetersizliğinin bir itirafı mı?</p>
+
+    <h2>Para Politikasının Etkinliği Sorgulanıyor</h2>
+
+    <p>Son on yılda merkez bankacılığı anlayışı köklü bir dönüşüm geçirdi. 2008 krizinin ardından hayata geçirilen sıra dışı para politikaları, geleneksel faiz kanalının ötesinde yeni araçlar geliştirdi. Varlık alım programları, negatif faiz uygulamaları ve "forward guidance" gibi araçlar, merkez bankalarının müdahale kapasitesini genişletti.</p>
+
+    <p>Ancak 2021–2022 enflasyon dalgası, bu araçların sınırlarını da gözler önüne serdi. Arz yönlü şoklarla başlayan enflasyon sarmalına faiz artışıyla müdahale etmek, talebi daraltabilirken arz sorunlarını çözmekte yetersiz kaldı.</p>
+
+    <blockquote>
+      <p>"Merkez bankaları enflasyona karşı savaşabilir, ancak arz zincirleri veya jeopolitik risklerle savaşamazlar."</p>
+      <cite>— IMF Baş Ekonomisti Pierre-Olivier Gourinchas, Davos 2025</cite>
+    </blockquote>
+
+    <p>Bu söylem, para politikasının yapısal sorunları çözmekteki sınırlılığına yapılan en açık göndermelerden biri. Nitekim merkez bankacıları, giderek artan bir sıklıkla maliye politikasıyla koordinasyona, hatta yapısal reformlara atıfta bulunmaya başlıyor.</p>
+
+    <div class="data-callout">
+      <div class="data-item">
+        <span class="data-value">%4,2</span>
+        <span class="data-label">ABD Çekirdek Enflasyon (2025 sonu)</span>
+      </div>
+      <div class="data-item">
+        <span class="data-value">%42,1</span>
+        <span class="data-label">Türkiye TÜFE (Mart 2026)</span>
+      </div>
+      <div class="data-item">
+        <span class="data-value">%2,4</span>
+        <span class="data-label">Eurozone Enflasyon (Q1 2026)</span>
+      </div>
+    </div>
+
+    <h2>Türkiye Özelinde Durum</h2>
+
+    <p>Türkiye, para politikasının karmaşıklığını belki de diğer gelişen piyasalardan daha derinden yaşayan ülkelerden biri. TCMB'nin 2023 sonundan itibaren hayata geçirdiği ortodoks sıkılaştırma politikası, enflasyonu tek haneli rakamlara çekme yolunda önemli adımlar attı; ancak bu süreç henüz tamamlanmış değil.</p>
+
+    <p>Yüksek faizin ekonomik büyümeye etkisi, konut kredisi maliyetleri ve KOBİ finansmanı üzerindeki baskısı, karar alıcıları çetrefilli bir denklemle yüz yüze bırakıyor. Enflasyonla mücadele mi, büyüme mi? Bu sorunun "doğru" yanıtı, hangi zaman dilimine bakıldığına göre dramatik biçimde değişiyor.</p>
+
+    <div class="chart-block">
+      <div class="chart-title">Türkiye Politika Faizi — Son 12 Ay (%)</div>
+      <div class="chart-bars" id="chart">
+        <div class="chart-bar"><div class="bar-fill" style="height:72%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:78%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:82%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:85%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:88%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:90%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:90%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:88%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:84%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:80%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:75%"></div></div>
+        <div class="chart-bar"><div class="bar-fill" style="height:70%"></div></div>
+      </div>
+      <div class="chart-labels">
+        <span>Nis</span><span>May</span><span>Haz</span><span>Tem</span>
+        <span>Ağu</span><span>Eyl</span><span>Eki</span><span>Kas</span>
+        <span>Ara</span><span>Oca</span><span>Şub</span><span>Mar</span>
+      </div>
+    </div>
+
+    <h2>2026 ve Sonrası: Senaryo Analizi</h2>
+
+    <p>Önümüzdeki dönemde üç temel senaryo öne çıkıyor. Birincisi "yumuşak iniş" senaryosu: merkez bankalarının faiz indirim sürecini yavaş ama istikrarlı biçimde yönetmesi ve enflasyonun hedef seviyelere yakınsaması. Bu, piyasaların fiyatladığı ana senaryo.</p>
+
+    <p>İkinci senaryo "erken gevşeme" riskini içeriyor: siyasi baskılar veya büyüme kaygılarıyla merkez bankalarının zamanından önce faiz indirmesi ve enflasyonun ikinci bir dalga yapması. Bunu destekleyen argümanlar çok az ama sonuçları en yıkıcı olan senaryo bu.</p>
+
+    <p>Üçüncü ve belki de en az tartışılan senaryo ise "yapısal enflasyon" meselesi: iklim değişikliği, demografik dönüşüm ve jeopolitik parçalanmanın yarattığı kalıcı arz yönlü baskıların enflasyonu sürekli hedefin üzerinde tutması. Bu durumda merkez bankalarının ne yapabileceği sorusu gerçekten zor bir yanıt bekliyor.</p>
+
+    <p>Sonuç olarak, merkez bankacılığı bir dönüm noktasında duruyor. Para politikasının sihirli değneği olmadığı çok açık; ancak bu araçların doğru kullanıldığında hâlâ güçlü bir istikrar sağlayıcı olduğu da tartışmasız. 2026, bu dengelerin ne kadar hassas tutulabileceğinin sınanacağı kritik bir yıl olacak.</p>
+
+    <div class="article-tags">
+      <a href="#" class="tag">Merkez Bankası</a>
+      <a href="#" class="tag">Enflasyon</a>
+      <a href="#" class="tag">Para Politikası</a>
+      <a href="#" class="tag">TCMB</a>
+      <a href="#" class="tag">Fed</a>
+      <a href="#" class="tag">Faiz</a>
+      <a href="#" class="tag">Makroekonomi</a>
+    </div>
+
+    <div class="share-block">
+      <div class="share-label">Bu yazıyı paylaş</div>
+      <div class="share-buttons">
+        <button class="share-btn">Twitter/X</button>
+        <button class="share-btn">LinkedIn</button>
+        <button class="share-btn">Bağlantıyı Kopyala</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="article-sidebar">
+    <div class="sidebar-sticky">
+
+      <div class="sidebar-widget">
+        <div class="widget-title">Canlı Piyasalar</div>
+        <div class="ticker-item">
+          <span class="tk-name">BIST 100</span>
+          <span class="tk-val">9.847</span>
+          <span class="tk-chg up">▲ %1,24</span>
+        </div>
+        <div class="ticker-item">
+          <span class="tk-name">USD/TRY</span>
+          <span class="tk-val">38,42</span>
+          <span class="tk-chg down">▼ %0,31</span>
+        </div>
+        <div class="ticker-item">
+          <span class="tk-name">Altın (gr)</span>
+          <span class="tk-val">3.142 ₺</span>
+          <span class="tk-chg up">▲ %0,87</span>
+        </div>
+        <div class="ticker-item">
+          <span class="tk-name">S&P 500</span>
+          <span class="tk-val">5.201</span>
+          <span class="tk-chg down">▼ %0,52</span>
+        </div>
+        <div class="ticker-item">
+          <span class="tk-name">BTC/USD</span>
+          <span class="tk-val">87.340 $</span>
+          <span class="tk-chg up">▲ %4,21</span>
+        </div>
+      </div>
+
+      <div class="sidebar-widget nl-sidebar">
+        <div class="nl-sidebar-title">Günlük bülten</div>
+        <div class="nl-sidebar-desc">Her sabah piyasa özeti e-postanıza gelsin.</div>
+        <input class="nl-sidebar-input" type="email" placeholder="E-posta adresiniz">
+        <button class="nl-sidebar-btn">Abone Ol</button>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">İlgili Yazılar</div>
+
+        <a href="#" class="related-item">
+          <div class="related-cat">Döviz</div>
+          <div class="related-title">Türk Lirası'nda Yeni Denge Arayışı</div>
+          <div class="related-meta">Dr. Ayşe Kara · 4 dk</div>
+        </a>
+
+        <a href="#" class="related-item">
+          <div class="related-cat">Borsa</div>
+          <div class="related-title">BIST'te Yabancı Yatırımcı Hamlesi</div>
+          <div class="related-meta">Selin Arslan · 5 dk</div>
+        </a>
+
+        <a href="#" class="related-item">
+          <div class="related-cat">Analiz</div>
+          <div class="related-title">2026 Yatırım Takvimi: Dikkat Edilmesi Gereken Tarihler</div>
+          <div class="related-meta">Can Öztürk · 6 dk</div>
+        </a>
+      </div>
+
+    </div>
+  </aside>
+
+</div>
+
+<!-- AUTHOR BIO -->
+<div class="author-bio">
+  <div class="author-bio-avatar">MY</div>
+  <div class="author-bio-content">
+    <div class="author-bio-name">Prof. Mehmet Yılmaz</div>
+    <div class="author-bio-role">Ekonomi Editörü</div>
+    <p class="author-bio-text">Prof. Yılmaz, 20 yıllık akademik kariyerinin ardından Kapital'in ekonomi editörlüğünü üstlendi. Makroekonomi, para politikası ve uluslararası finans alanlarında uzmanlaşan yazar, çeşitli uluslararası kuruluşlara danışmanlık hizmeti vermektedir.</p>
+  </div>
+</div>
+
+<!-- MORE ARTICLES -->
+<div class="more-articles">
+  <h2 class="more-title">Daha Fazla Okuyun</h2>
+  <div class="more-grid">
+    <a href="#" class="more-card">
+      <div class="more-cat">Kripto</div>
+      <div class="more-card-title">Bitcoin'in 90.000 Dolar Direnci ve Kurumsal Talep</div>
+      <div class="more-meta">Can Öztürk · 6 dk · Dün</div>
+    </a>
+    <a href="#" class="more-card">
+      <div class="more-cat">Gayrimenkul</div>
+      <div class="more-card-title">İstanbul Konut Piyasasında Satın Alma mı, Kira mı?</div>
+      <div class="more-meta">Zeynep Çelik · 7 dk · 7 Nisan</div>
+    </a>
+    <a href="#" class="more-card">
+      <div class="more-cat">Borsa</div>
+      <div class="more-card-title">BIST'te Yabancı Yatırımcı Hamlesi: Taktiksel mi, Stratejik mi?</div>
+      <div class="more-meta">Selin Arslan · 5 dk · Bugün</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo">Kapit<span>a</span>l</a>
+  <ul class="footer-links">
+    <li><a href="#">Hakkımızda</a></li>
+    <li><a href="#">Yazarlar</a></li>
+    <li><a href="#">Reklam</a></li>
+    <li><a href="#">Gizlilik</a></li>
+    <li><a href="#">İletişim</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Kapital. Tüm hakları saklıdır.</span>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+  });
+</script>
+
+</body>
+</html>
