@@ -8,531 +8,153 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --black: #0a0a08;
-    --cream: #f5f2eb;
-    --gold: #c9a84c;
-    --gold-light: #e8d08a;
-    --red: #c23b22;
-    --green: #1d7a4a;
-    --text: #1a1a16;
-    --muted: #6b6b60;
+    --black: #0a0a08; --cream: #f5f2eb; --gold: #c9a84c; --gold-light: #e8d08a;
+    --red: #c23b22; --green: #1d7a4a; --text: #1a1a16; --muted: #6b6b60;
     --border: rgba(10,10,8,0.12);
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'DM Sans', sans-serif;
   }
-
   html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--cream); color: var(--text); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
 
-  body {
-    font-family: var(--font-body);
-    background: var(--cream);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(245,242,235,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--black);
-    text-decoration: none;
-  }
-
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(245,242,235,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; letter-spacing: -0.02em; color: var(--black); text-decoration: none; }
   .nav-logo span { color: var(--gold); }
-
-  .nav-links {
-    display: flex; gap: 2.5rem; list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--black); }
-
-  .nav-cta {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.4rem;
-    background: var(--black);
-    color: var(--cream);
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-
+  .nav-cta { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.55rem 1.4rem; background: var(--black); color: var(--cream); border: none; cursor: pointer; text-decoration: none; transition: background 0.2s; }
   .nav-cta:hover { background: #2a2a22; }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 5rem;
-  }
-
-  .hero-left {
-    padding: 6rem 4rem 4rem;
-    display: flex; flex-direction: column; justify-content: center;
-    border-right: 0.5px solid var(--border);
-  }
-
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2rem;
-  }
-
-  .hero-tag::before {
-    content: '';
-    width: 2rem; height: 1px;
-    background: var(--gold);
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: var(--black);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  .hero-desc {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: var(--muted);
-    max-width: 32ch;
-    margin-bottom: 3rem;
-    line-height: 1.7;
-  }
-
-  .hero-actions {
-    display: flex; gap: 1rem; align-items: center;
-  }
-
-  .btn-primary {
-    padding: 0.9rem 2.2rem;
-    background: var(--black);
-    color: var(--cream);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border: none; cursor: pointer; text-decoration: none;
-    transition: background 0.2s;
-  }
-
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; }
+  .hero-left { padding: 6rem 4rem 4rem; display: flex; flex-direction: column; justify-content: center; border-right: 0.5px solid var(--border); }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
+  .hero-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+  .hero-title { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; color: var(--black); margin-bottom: 1.5rem; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-desc { font-size: 1.05rem; font-weight: 300; color: var(--muted); max-width: 32ch; margin-bottom: 3rem; line-height: 1.7; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary { padding: 0.9rem 2.2rem; background: var(--black); color: var(--cream); font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s; }
   .btn-primary:hover { background: var(--gold); color: var(--black); }
-
-  .btn-ghost {
-    padding: 0.9rem 2.2rem;
-    background: transparent;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border: 0.5px solid var(--border); cursor: pointer; text-decoration: none;
-    transition: all 0.2s;
-  }
-
+  .btn-ghost { padding: 0.9rem 2.2rem; background: transparent; color: var(--muted); font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; border: 0.5px solid var(--border); cursor: pointer; text-decoration: none; transition: all 0.2s; }
   .btn-ghost:hover { border-color: var(--black); color: var(--black); }
-
-  .hero-right {
-    padding: 6rem 4rem 4rem;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-
-  .ticker-strip {
-    background: var(--black);
-    color: var(--cream);
-    padding: 1rem 1.5rem;
-    margin-bottom: 2rem;
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-
-  .ticker-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.4);
-  }
-
-  .ticker-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.6rem 0;
-    border-bottom: 0.5px solid rgba(245,242,235,0.1);
-  }
-
+  .hero-right { padding: 6rem 4rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+  .ticker-strip { background: var(--black); color: var(--cream); padding: 1rem 1.5rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .ticker-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,242,235,0.4); }
+  .ticker-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 0.5px solid rgba(245,242,235,0.1); }
   .ticker-row:last-child { border-bottom: none; }
-
-  .ticker-name {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-  }
-
-  .ticker-value {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .ticker-change {
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.2rem 0.5rem;
-  }
-
-  .up { color: #4ade80; }
-  .down { color: #f87171; }
-
-  .featured-article {
-    border: 0.5px solid var(--border);
-    padding: 2rem;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    text-decoration: none; display: block; color: inherit;
-  }
-
+  .ticker-name { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em; }
+  .ticker-value { font-family: var(--font-display); font-size: 1rem; font-weight: 700; }
+  .ticker-change { font-size: 0.75rem; font-weight: 500; padding: 0.2rem 0.5rem; }
+  .up { color: #4ade80; } .down { color: #f87171; }
+  .featured-article { border: 0.5px solid var(--border); padding: 2rem; cursor: pointer; transition: border-color 0.2s; text-decoration: none; display: block; color: inherit; }
   .featured-article:hover { border-color: var(--gold); }
+  .article-category { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .article-title-sm { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; color: var(--black); }
+  .article-meta { font-size: 0.78rem; color: var(--muted); display: flex; gap: 1rem; }
 
-  .article-category {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
+  .live-ticker { background: var(--black); padding: 0.7rem 0; overflow: hidden; white-space: nowrap; }
+  .ticker-scroll { display: inline-block; animation: scroll-left 30s linear infinite; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; color: var(--cream); }
+  .ticker-scroll .tk-up { color: #4ade80; }
+  .ticker-scroll .tk-dn { color: #f87171; }
+  @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  .article-title-sm {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 0.75rem;
-    color: var(--black);
-  }
+  /* AI SECTION */
+  .ai-section { background: var(--black); padding: 5rem 4rem; position: relative; }
+  .ai-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
+  .ai-header-left { display: flex; flex-direction: column; gap: 0.4rem; }
+  .ai-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+  .ai-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.8); } }
+  .ai-section-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; color: var(--cream); letter-spacing: -0.02em; }
+  .ai-refresh { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: transparent; border: 0.5px solid rgba(201,168,76,0.4); color: var(--gold); font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .ai-refresh:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+  .ai-refresh:disabled { opacity: 0.4; cursor: not-allowed; }
+  .spin-icon { display: inline-block; }
+  .spinning .spin-icon { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ai-grid { display: grid; grid-template-columns: 1fr 320px; gap: 2rem; }
+  .ai-main { border: 0.5px solid rgba(245,242,235,0.12); padding: 2.5rem; }
+  .ai-main-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 0.5px solid rgba(245,242,235,0.1); }
+  .ai-date { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,235,0.35); }
+  .ai-model-tag { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.08em; padding: 0.2rem 0.6rem; border: 0.5px solid rgba(201,168,76,0.3); color: var(--gold); text-transform: uppercase; }
+  .ai-headline { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; line-height: 1.3; color: var(--cream); margin-bottom: 1.25rem; }
+  .ai-body { font-size: 0.92rem; font-weight: 300; line-height: 1.85; color: rgba(245,242,235,0.65); }
+  .ai-body p { margin-bottom: 1rem; }
+  .ai-body p:last-child { margin-bottom: 0; }
+  .ai-points { margin-top: 1.75rem; padding-top: 1.75rem; border-top: 0.5px solid rgba(245,242,235,0.1); display: flex; flex-direction: column; gap: 0.75rem; }
+  .ai-points-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,242,235,0.3); margin-bottom: 0.25rem; }
+  .ai-point { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.85rem; color: rgba(245,242,235,0.7); line-height: 1.5; }
+  .ai-point-num { width: 16px; height: 16px; border: 0.5px solid var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 0.6rem; color: var(--gold); font-weight: 700; }
+  .ai-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+  .ai-card { border: 0.5px solid rgba(245,242,235,0.1); padding: 1.5rem; }
+  .ai-card-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,242,235,0.3); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(245,242,235,0.08); }
+  .sent-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .sent-row:last-child { margin-bottom: 0; }
+  .sent-label { min-width: 52px; font-size: 0.75rem; color: rgba(245,242,235,0.6); }
+  .sent-bg { flex: 1; height: 3px; background: rgba(245,242,235,0.08); border-radius: 2px; overflow: hidden; }
+  .sent-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+  .fill-bull { background: #4ade80; } .fill-bear { background: #f87171; } .fill-neutral { background: rgba(201,168,76,0.8); }
+  .sent-pct { font-size: 0.72rem; font-weight: 500; min-width: 30px; text-align: right; color: rgba(245,242,235,0.4); }
+  .sector-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: rgba(245,242,235,0.6); padding: 0.4rem 0; border-bottom: 0.5px solid rgba(245,242,235,0.06); }
+  .sector-row:last-child { border-bottom: none; }
+  .sig { font-size: 0.68rem; font-weight: 500; padding: 0.15rem 0.5rem; letter-spacing: 0.06em; }
+  .sig-buy { color: #4ade80; border: 0.5px solid rgba(74,222,128,0.3); }
+  .sig-watch { color: var(--gold); border: 0.5px solid rgba(201,168,76,0.3); }
+  .sig-caution { color: #f87171; border: 0.5px solid rgba(248,113,113,0.3); }
+  .ai-err { text-align: center; padding: 3rem 2rem; }
+  .ai-err-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem; }
+  .ai-err-desc { font-size: 0.85rem; color: rgba(245,242,235,0.4); line-height: 1.6; }
 
-  .article-meta {
-    font-size: 0.78rem;
-    color: var(--muted);
-    display: flex; gap: 1rem;
-  }
+  .sk { background: rgba(245,242,235,0.06); border-radius: 2px; position: relative; overflow: hidden; display: block; }
+  .sk::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(245,242,235,0.05), transparent); animation: shimmer 1.8s ease-in-out infinite; }
+  @keyframes shimmer { to { left: 100%; } }
 
-  /* TICKER TICKER */
-  .live-ticker {
-    background: var(--black);
-    padding: 0.7rem 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .ticker-scroll {
-    display: inline-block;
-    animation: scroll-left 30s linear infinite;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--cream);
-  }
-
-  .ticker-scroll span {
-    margin: 0 2rem;
-    opacity: 0.6;
-  }
-
-  .ticker-scroll .tk-up { color: #4ade80; opacity: 1; }
-  .ticker-scroll .tk-dn { color: #f87171; opacity: 1; }
-
-  @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SECTION */
-  .section {
-    padding: 5rem 4rem;
-  }
-
-  .section-header {
-    display: flex; align-items: baseline; justify-content: space-between;
-    margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 0.5px solid var(--border);
-  }
-
-  .section-title {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--black);
-  }
-
-  .section-link {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 0.4rem;
-    transition: color 0.2s;
-  }
-
+  .section { padding: 5rem 4rem; }
+  .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+  .section-title { font-family: var(--font-display); font-size: 2rem; font-weight: 900; letter-spacing: -0.02em; color: var(--black); }
+  .section-link { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .section-link:hover { color: var(--black); }
-
-  /* ARTICLES GRID */
-  .articles-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 0;
-  }
-
-  .article-card {
-    border: 0.5px solid var(--border);
-    margin: -0.5px;
-    padding: 2rem;
-    display: flex; flex-direction: column;
-    text-decoration: none; color: inherit;
-    transition: background 0.2s;
-  }
-
+  .articles-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 0; }
+  .article-card { border: 0.5px solid var(--border); margin: -0.5px; padding: 2rem; display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: background 0.2s; }
   .article-card:hover { background: rgba(201,168,76,0.05); }
-
   .article-card.featured { grid-row: span 2; }
-
-  .card-category {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .card-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--black);
-    margin-bottom: auto;
-    padding-bottom: 1.5rem;
-  }
-
+  .card-category { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .card-title { font-family: var(--font-display); font-weight: 700; line-height: 1.25; color: var(--black); margin-bottom: auto; padding-bottom: 1.5rem; }
   .article-card.featured .card-title { font-size: 1.8rem; }
   .article-card:not(.featured) .card-title { font-size: 1.1rem; }
-
-  .card-excerpt {
-    font-size: 0.88rem;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-
-  .card-footer {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-top: 1.5rem;
-    border-top: 0.5px solid var(--border);
-    font-size: 0.75rem;
-    color: var(--muted);
-  }
-
+  .card-excerpt { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.6; margin-bottom: 1.5rem; }
+  .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 0.5px solid var(--border); font-size: 0.75rem; color: var(--muted); }
   .card-author { font-weight: 500; }
-
-  /* OPINION SECTION */
-  .opinion-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-  }
-
-  .opinion-card {
-    border: 0.5px solid var(--border);
-    margin: -0.5px;
-    padding: 2.5rem 2rem;
-    text-decoration: none; color: inherit;
-    display: flex; flex-direction: column; gap: 1rem;
-    transition: background 0.2s;
-  }
-
+  .opinion-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .opinion-card { border: 0.5px solid var(--border); margin: -0.5px; padding: 2.5rem 2rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 1rem; transition: background 0.2s; }
   .opinion-card:hover { background: rgba(201,168,76,0.05); }
-
-  .opinion-number {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 900;
-    color: rgba(10,10,8,0.08);
-    line-height: 1;
-  }
-
-  .opinion-title {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--black);
-  }
-
-  .opinion-author {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 0.5px solid var(--border);
-  }
-
-  /* NEWSLETTER */
-  .newsletter {
-    background: var(--black);
-    padding: 5rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .nl-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 900;
-    color: var(--cream);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
+  .opinion-number { font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: rgba(10,10,8,0.08); line-height: 1; }
+  .opinion-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; line-height: 1.3; color: var(--black); }
+  .opinion-author { font-size: 0.8rem; color: var(--muted); margin-top: auto; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+  .newsletter { background: var(--black); padding: 5rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .nl-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; color: var(--cream); line-height: 1.1; letter-spacing: -0.02em; }
   .nl-title em { color: var(--gold); font-style: italic; }
-
-  .nl-desc {
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: rgba(245,242,235,0.55);
-    margin-top: 1.5rem;
-    line-height: 1.7;
-  }
-
-  .nl-form {
-    display: flex; flex-direction: column; gap: 1rem;
-  }
-
-  .nl-input {
-    padding: 1rem 1.5rem;
-    background: rgba(245,242,235,0.08);
-    border: 0.5px solid rgba(245,242,235,0.2);
-    color: var(--cream);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
+  .nl-desc { font-size: 0.95rem; font-weight: 300; color: rgba(245,242,235,0.55); margin-top: 1.5rem; line-height: 1.7; }
+  .nl-form { display: flex; flex-direction: column; gap: 1rem; }
+  .nl-input { padding: 1rem 1.5rem; background: rgba(245,242,235,0.08); border: 0.5px solid rgba(245,242,235,0.2); color: var(--cream); font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
   .nl-input::placeholder { color: rgba(245,242,235,0.35); }
   .nl-input:focus { border-color: var(--gold); }
-
-  .nl-submit {
-    padding: 1rem 2.5rem;
-    background: var(--gold);
-    color: var(--black);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: none; cursor: pointer;
-    transition: background 0.2s;
-    align-self: flex-start;
-  }
-
+  .nl-submit { padding: 1rem 2.5rem; background: var(--gold); color: var(--black); font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; align-self: flex-start; }
   .nl-submit:hover { background: var(--gold-light); }
-
-  .nl-privacy {
-    font-size: 0.72rem;
-    color: rgba(245,242,235,0.3);
-    margin-top: 0.5rem;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--black);
-    border-top: 0.5px solid rgba(245,242,235,0.1);
-    padding: 3rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-
-  .footer-logo {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: var(--cream);
-    text-decoration: none;
-  }
-
+  .nl-privacy { font-size: 0.72rem; color: rgba(245,242,235,0.3); margin-top: 0.5rem; }
+  footer { background: var(--black); border-top: 0.5px solid rgba(245,242,235,0.1); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 900; color: var(--cream); text-decoration: none; }
   .footer-logo span { color: var(--gold); }
-
-  .footer-links {
-    display: flex; gap: 2rem; list-style: none;
-  }
-
-  .footer-links a {
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.4);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,242,235,0.4); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--cream); }
-
-  .footer-copy {
-    font-size: 0.72rem;
-    color: rgba(245,242,235,0.25);
-  }
+  .footer-copy { font-size: 0.72rem; color: rgba(245,242,235,0.25); }
 
   @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; }
     .hero-left, .hero-right { padding: 3rem 1.5rem; }
     .hero-right { border-top: 0.5px solid var(--border); }
@@ -543,6 +165,9 @@
     .newsletter { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
     .footer-links { flex-wrap: wrap; justify-content: center; }
+    .ai-section { padding: 3rem 1.5rem; }
+    .ai-grid { grid-template-columns: 1fr; }
+    .ai-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
   }
 </style>
 </head>
@@ -560,7 +185,6 @@
   <a href="#newsletter" class="nav-cta">Abone Ol</a>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-tag">Günlük Finans Analizi</div>
@@ -571,45 +195,22 @@
       <a href="#newsletter" class="btn-ghost">Bülten</a>
     </div>
   </div>
-
   <div class="hero-right">
     <div class="ticker-strip">
-      <div class="ticker-label">Canlı Piyasalar — 09 Nisan 2026</div>
-      <div class="ticker-row">
-        <span class="ticker-name">BIST 100</span>
-        <span class="ticker-value">9.847,32</span>
-        <span class="ticker-change up">▲ %1,24</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-name">USD/TRY</span>
-        <span class="ticker-value">38,42</span>
-        <span class="ticker-change down">▼ %0,31</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-name">ALTIN (gr)</span>
-        <span class="ticker-value">3.142 ₺</span>
-        <span class="ticker-change up">▲ %0,87</span>
-      </div>
-      <div class="ticker-row">
-        <span class="ticker-name">S&P 500</span>
-        <span class="ticker-value">5.201,14</span>
-        <span class="ticker-change down">▼ %0,52</span>
-      </div>
+      <div class="ticker-label">Canlı Piyasalar — 17 Nisan 2026</div>
+      <div class="ticker-row"><span class="ticker-name">BIST 100</span><span class="ticker-value">9.847,32</span><span class="ticker-change up">▲ %1,24</span></div>
+      <div class="ticker-row"><span class="ticker-name">USD/TRY</span><span class="ticker-value">38,42</span><span class="ticker-change down">▼ %0,31</span></div>
+      <div class="ticker-row"><span class="ticker-name">ALTIN (gr)</span><span class="ticker-value">3.142 ₺</span><span class="ticker-change up">▲ %0,87</span></div>
+      <div class="ticker-row"><span class="ticker-name">S&P 500</span><span class="ticker-value">5.201,14</span><span class="ticker-change down">▼ %0,52</span></div>
     </div>
-
     <a href="article.html" class="featured-article">
       <div class="article-category">Öne Çıkan Yazı</div>
       <div class="article-title-sm">Fed'in Faiz Kararı Sonrası Gelişen Piyasalarda Ne Beklemeliyiz?</div>
-      <div class="article-meta">
-        <span>Dr. Ayşe Kara</span>
-        <span>8 dk okuma</span>
-        <span>Bugün</span>
-      </div>
+      <div class="article-meta"><span>Dr. Ayşe Kara</span><span>8 dk okuma</span><span>Bugün</span></div>
     </a>
   </div>
 </section>
 
-<!-- LIVE TICKER -->
 <div class="live-ticker">
   <span class="ticker-scroll">
     THYAO <span class="tk-up">▲ %2,1 · 184,40 ₺</span> &nbsp;|&nbsp;
@@ -626,12 +227,58 @@
     SASA <span class="tk-up">▲ %3,4 · 127,60 ₺</span> &nbsp;|&nbsp;
     GARAN <span class="tk-up">▲ %1,1 · 94,30 ₺</span> &nbsp;|&nbsp;
     AKBNK <span class="tk-dn">▼ %0,4 · 62,10 ₺</span> &nbsp;|&nbsp;
-    KCHOL <span class="tk-up">▲ %0,9 · 211,80 ₺</span> &nbsp;|&nbsp;
     BTC/USD <span class="tk-up">▲ %4,2 · 87.340 $</span> &nbsp;|&nbsp;
-    EUR/USD <span class="tk-dn">▼ %0,2 · 1,0831</span> &nbsp;|&nbsp;
     BRENT <span class="tk-up">▲ %1,3 · 74,50 $</span>
   </span>
 </div>
+
+<!-- AI ANALİZ -->
+<section class="ai-section" id="ai-analysis">
+  <div class="ai-header">
+    <div class="ai-header-left">
+      <div class="ai-badge"><span class="ai-dot"></span>Yapay Zeka ile Güçlendirilmiş</div>
+      <h2 class="ai-section-title">Günün Finans Analizi</h2>
+    </div>
+    <button class="ai-refresh" id="refreshBtn" onclick="fetchAnalysis(true)">
+      <span class="spin-icon">↻</span>&nbsp;Yenile
+    </button>
+  </div>
+
+  <div class="ai-grid">
+    <div class="ai-main">
+      <div class="ai-main-top">
+        <span class="ai-date" id="aiDate">Yükleniyor...</span>
+        <span class="ai-model-tag">Gemini 2.0 Flash</span>
+      </div>
+      <div id="aiContent">
+        <div class="sk" style="height:26px;width:78%;margin-bottom:16px;"></div>
+        <div class="sk" style="height:13px;width:100%;margin-bottom:8px;"></div>
+        <div class="sk" style="height:13px;width:100%;margin-bottom:8px;"></div>
+        <div class="sk" style="height:13px;width:60%;margin-bottom:20px;"></div>
+        <div class="sk" style="height:13px;width:100%;margin-bottom:8px;"></div>
+        <div class="sk" style="height:13px;width:85%;margin-bottom:8px;"></div>
+        <div class="sk" style="height:13px;width:45%;"></div>
+      </div>
+    </div>
+    <div class="ai-sidebar">
+      <div class="ai-card">
+        <div class="ai-card-label">Piyasa Duyarlılığı</div>
+        <div class="sent-row"><span class="sent-label">Yükseliş</span><div class="sent-bg"><div class="sent-fill fill-bull" id="bullBar" style="width:0%"></div></div><span class="sent-pct" id="bullPct">—</span></div>
+        <div class="sent-row"><span class="sent-label">Düşüş</span><div class="sent-bg"><div class="sent-fill fill-bear" id="bearBar" style="width:0%"></div></div><span class="sent-pct" id="bearPct">—</span></div>
+        <div class="sent-row"><span class="sent-label">Nötr</span><div class="sent-bg"><div class="sent-fill fill-neutral" id="neutralBar" style="width:0%"></div></div><span class="sent-pct" id="neutralPct">—</span></div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-label">Sektör Sinyalleri</div>
+        <div id="sectorList">
+          <div class="sector-row"><span class="sk" style="width:80px;height:12px;display:inline-block;"></span><span class="sk" style="width:36px;height:12px;display:inline-block;"></span></div>
+          <div class="sector-row"><span class="sk" style="width:65px;height:12px;display:inline-block;"></span><span class="sk" style="width:36px;height:12px;display:inline-block;"></span></div>
+          <div class="sector-row"><span class="sk" style="width:90px;height:12px;display:inline-block;"></span><span class="sk" style="width:36px;height:12px;display:inline-block;"></span></div>
+          <div class="sector-row"><span class="sk" style="width:72px;height:12px;display:inline-block;"></span><span class="sk" style="width:36px;height:12px;display:inline-block;"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SON YAZILAR -->
 <section class="section" id="articles">
@@ -639,94 +286,69 @@
     <h2 class="section-title">Son Yazılar</h2>
     <a href="#" class="section-link">Tümünü Gör →</a>
   </div>
-
   <div class="articles-grid">
     <a href="article.html" class="article-card featured">
       <div class="card-category">Makroekonomi</div>
       <h3 class="card-title">Enflasyonla Mücadelede Merkez Bankalarının Sınırları: 2026 Perspektifi</h3>
       <p class="card-excerpt">Küresel merkez bankaları faiz indirimi sürecine girerken, enflasyonla mücadelenin yeni bir evreye girdiği görülüyor. Bu yazıda para politikasının etkinliğini ve önümüzdeki dönemde bizi nelerin beklediğini inceliyoruz.</p>
-      <div class="card-footer">
-        <span class="card-author">Prof. Mehmet Yılmaz</span>
-        <span>12 dk okuma · 8 Nisan</span>
-      </div>
+      <div class="card-footer"><span class="card-author">Prof. Mehmet Yılmaz</span><span>12 dk · 8 Nisan</span></div>
     </a>
-
     <a href="article.html" class="article-card">
       <div class="card-category">Borsa</div>
       <h3 class="card-title">BIST'te Yabancı Yatırımcı Hamlesi</h3>
-      <div class="card-footer">
-        <span class="card-author">Selin Arslan</span>
-        <span>5 dk · Bugün</span>
-      </div>
+      <div class="card-footer"><span class="card-author">Selin Arslan</span><span>5 dk · Bugün</span></div>
     </a>
-
     <a href="article.html" class="article-card">
       <div class="card-category">Kripto</div>
       <h3 class="card-title">Bitcoin'in 90.000 Dolar Direnci ve Kurumsal Talep</h3>
-      <div class="card-footer">
-        <span class="card-author">Can Öztürk</span>
-        <span>6 dk · Dün</span>
-      </div>
+      <div class="card-footer"><span class="card-author">Can Öztürk</span><span>6 dk · Dün</span></div>
     </a>
-
     <a href="article.html" class="article-card">
       <div class="card-category">Gayrimenkul</div>
       <h3 class="card-title">İstanbul Konut Piyasasında Satın Alma mı, Kira mı?</h3>
-      <div class="card-footer">
-        <span class="card-author">Zeynep Çelik</span>
-        <span>7 dk · 7 Nisan</span>
-      </div>
+      <div class="card-footer"><span class="card-author">Zeynep Çelik</span><span>7 dk · 7 Nisan</span></div>
     </a>
-
     <a href="article.html" class="article-card">
       <div class="card-category">Döviz</div>
       <h3 class="card-title">Türk Lirası'nda Yeni Denge Arayışı</h3>
-      <div class="card-footer">
-        <span class="card-author">Dr. Ayşe Kara</span>
-        <span>4 dk · 6 Nisan</span>
-      </div>
+      <div class="card-footer"><span class="card-author">Dr. Ayşe Kara</span><span>4 dk · 6 Nisan</span></div>
     </a>
   </div>
 </section>
 
 <!-- KÖŞE YAZILARI -->
-<section class="section" style="padding-top: 0;">
+<section class="section" style="padding-top:0;">
   <div class="section-header">
     <h2 class="section-title">Köşe Yazıları</h2>
     <a href="#" class="section-link">Tüm Yazarlar →</a>
   </div>
-
   <div class="opinion-grid">
     <a href="article.html" class="opinion-card">
       <div class="opinion-number">01</div>
       <div class="opinion-title">Yapay Zeka Borsaları Nasıl Değiştiriyor?</div>
-      <p style="font-size: 0.85rem; color: var(--muted); font-weight: 300;">Algoritmik ticaretin yeni boyutu ve bireysel yatırımcıya etkisi üzerine bir analiz.</p>
+      <p style="font-size:0.85rem;color:var(--muted);font-weight:300;">Algoritmik ticaretin yeni boyutu ve bireysel yatırımcıya etkisi üzerine bir analiz.</p>
       <div class="opinion-author">Prof. Mehmet Yılmaz — Ekonomi Editörü</div>
     </a>
-
     <a href="article.html" class="opinion-card">
       <div class="opinion-number">02</div>
       <div class="opinion-title">ESG Yatırımları Gerçekten İşe Yarıyor mu?</div>
-      <p style="font-size: 0.85rem; color: var(--muted); font-weight: 300;">Sürdürülebilir finansın performansını verilere dayalı olarak değerlendiriyoruz.</p>
+      <p style="font-size:0.85rem;color:var(--muted);font-weight:300;">Sürdürülebilir finansın performansını verilere dayalı olarak değerlendiriyoruz.</p>
       <div class="opinion-author">Selin Arslan — Borsa Analisti</div>
     </a>
-
     <a href="article.html" class="opinion-card">
       <div class="opinion-number">03</div>
       <div class="opinion-title">Gençlerin Yatırım Alışkanlıkları Değişiyor</div>
-      <p style="font-size: 0.85rem; color: var(--muted); font-weight: 300;">Z kuşağı tasarruf ve yatırım davranışları üzerine kapsamlı bir inceleme.</p>
+      <p style="font-size:0.85rem;color:var(--muted);font-weight:300;">Z kuşağı tasarruf ve yatırım davranışları üzerine kapsamlı bir inceleme.</p>
       <div class="opinion-author">Zeynep Çelik — Kişisel Finans</div>
     </a>
   </div>
 </section>
 
-<!-- NEWSLETTER -->
 <section class="newsletter" id="newsletter">
   <div>
     <h2 class="nl-title">Her sabah<br><em>piyasalara</em><br>hazır olun.</h2>
     <p class="nl-desc">Günlük finans bülteni ile sabah kahvenizle birlikte piyasaları, ekonomik gelişmeleri ve uzman analizleri alın. 50.000+ okuyucu zaten abone.</p>
   </div>
-
   <div class="nl-form">
     <input class="nl-input" type="text" placeholder="Ad Soyad">
     <input class="nl-input" type="email" placeholder="E-posta adresiniz">
@@ -747,5 +369,135 @@
   <span class="footer-copy">© 2026 Kapital. Tüm hakları saklıdır.</span>
 </footer>
 
+<script>
+// ── BURAYA KENDİ API ANAHTARINIZI YAZIN ──────────────────────────────────────
+const GEMINI_KEY = 'BURAYA_API_ANAHTARINIZI_YAZIN';
+// ─────────────────────────────────────────────────────────────────────────────
+
+const GEMINI_URL     = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+const CACHE_KEY      = 'kapital_ai_v3';
+const CACHE_DATE_KEY = 'kapital_ai_date_v3';
+
+function isCacheValid() {
+  return localStorage.getItem(CACHE_DATE_KEY) === new Date().toDateString()
+      && localStorage.getItem(CACHE_KEY);
+}
+
+async function fetchAnalysis(force) {
+  if (!force && isCacheValid()) {
+    render(JSON.parse(localStorage.getItem(CACHE_KEY)));
+    return;
+  }
+  setLoading(true);
+  const d = new Date();
+  const dateStr   = d.toLocaleDateString('tr-TR', { day:'numeric', month:'long', year:'numeric' });
+  const dayOfWeek = d.toLocaleDateString('tr-TR', { weekday:'long' });
+
+  const prompt = `Sen Kapital adlı Türk finans haber sitesinin baş ekonomi analistisin.
+Bugünün tarihi: ${dayOfWeek}, ${dateStr}.
+Kapsamlı bir GÜNLÜK FİNANS ANALİZİ hazırla. Yanıt SADECE geçerli JSON olsun, başka metin olmasın.
+
+{
+  "headline": "Çarpıcı analitik başlık (max 15 kelime)",
+  "paragraphs": [
+    "Küresel piyasalar ve makro ortam (3-4 cümle)",
+    "Türkiye ekonomisi ve BIST değerlendirmesi (3-4 cümle)",
+    "Yatırımcılar için fırsat veya risk (2-3 cümle)"
+  ],
+  "keyPoints": ["nokta 1","nokta 2","nokta 3","nokta 4"],
+  "sentiment": { "bull": 45, "bear": 30, "neutral": 25 },
+  "sectors": [
+    {"name":"Bankacılık","signal":"buy"},
+    {"name":"Enerji","signal":"watch"},
+    {"name":"Teknoloji","signal":"buy"},
+    {"name":"Gayrimenkul","signal":"caution"},
+    {"name":"Savunma","signal":"watch"}
+  ]
+}
+
+Kurallar: Türkçe. sentiment toplamı=100. signal: "buy"/"watch"/"caution". Sadece JSON döndür.`;
+
+  try {
+    const res = await fetch(`${GEMINI_URL}?key=${GEMINI_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1200 }
+      })
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `HTTP ${res.status}`); }
+    const data   = await res.json();
+    const raw    = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    localStorage.setItem(CACHE_KEY, JSON.stringify(parsed));
+    localStorage.setItem(CACHE_DATE_KEY, new Date().toDateString());
+    render(parsed);
+  } catch(err) {
+    console.error(err);
+    renderErr(err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+function render(d) {
+  document.getElementById('aiDate').textContent =
+    new Date().toLocaleDateString('tr-TR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+  document.getElementById('aiContent').innerHTML = `
+    <h3 class="ai-headline">${esc(d.headline)}</h3>
+    <div class="ai-body">${(d.paragraphs||[]).map(p=>`<p>${esc(p)}</p>`).join('')}</div>
+    <div class="ai-points">
+      <div class="ai-points-label">Kritik Noktalar</div>
+      ${(d.keyPoints||[]).map((pt,i)=>`
+        <div class="ai-point"><span class="ai-point-num">${i+1}</span><span>${esc(pt)}</span></div>`).join('')}
+    </div>`;
+
+  const s = d.sentiment || {bull:40,bear:30,neutral:30};
+  setTimeout(() => {
+    document.getElementById('bullBar').style.width    = s.bull+'%';
+    document.getElementById('bearBar').style.width    = s.bear+'%';
+    document.getElementById('neutralBar').style.width = s.neutral+'%';
+    document.getElementById('bullPct').textContent    = '%'+s.bull;
+    document.getElementById('bearPct').textContent    = '%'+s.bear;
+    document.getElementById('neutralPct').textContent = '%'+s.neutral;
+  }, 150);
+
+  const lbl={buy:'AL',watch:'İZLE',caution:'DİKKAT'};
+  const cls={buy:'sig-buy',watch:'sig-watch',caution:'sig-caution'};
+  document.getElementById('sectorList').innerHTML = (d.sectors||[]).map(s=>`
+    <div class="sector-row">
+      <span>${esc(s.name)}</span>
+      <span class="sig ${cls[s.signal]||'sig-watch'}">${lbl[s.signal]||s.signal}</span>
+    </div>`).join('');
+}
+
+function renderErr(msg) {
+  document.getElementById('aiContent').innerHTML = `
+    <div class="ai-err">
+      <div style="font-size:2rem;margin-bottom:1rem;">⚠</div>
+      <div class="ai-err-title">Analiz yüklenemedi</div>
+      <div class="ai-err-desc">${
+        msg.includes('403')||msg.includes('API_KEY') ? 'API anahtarı geçersiz. Lütfen kontrol edin.' :
+        msg.includes('429') ? 'İstek limiti aşıldı, biraz bekleyin.' :
+        'Hata: '+esc(msg)
+      }</div>
+    </div>`;
+}
+
+function setLoading(on) {
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = on;
+  btn.classList.toggle('spinning', on);
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.addEventListener('DOMContentLoaded', () => fetchAnalysis(false));
+</script>
 </body>
 </html>
+const GEMINI_KEY = 'AQ.Ab8RN6LUrR3xbCY1tVG3ZCND9-yVxvNo1Bm6W4-4q863rO1Wyg';
